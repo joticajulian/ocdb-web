@@ -1,35 +1,23 @@
-var logged = false;
-
-$('#login-problems').hide();
 
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     // User is signed in
-    console.log("logged in:");//+JSON.stringify(user));   
-    console.log("user.uid: "+user.uid);
-    name = user.uid.replace("steemconnect:","");
-    $("#nav-user").show();
+    console.log("logged in "+user.uid);
+    name = user.uid.replace("steemconnect:","");    
     $("#nav-user").html(imgUser(name));
-    //if(location.pathname == "/login.html") window.open("/dashboard.html", "_self");
-    logged = true;
+    $("#nav-user").show();
+    $("#nav-login").hide();
+    $("#nav-logout").show();    
   } else {
-    console.log("logged out...");
+    console.log("logged out");
     $("#nav-user").hide();
-    logged = false;
-    //if(location.pathname != "/login.html") window.open("/login.html", "_self");
+    $("#nav-login").show();
+    $("#nav-logout").hide();    
   }
 });
 
 function login(){
-  /*var email = $('#email').val();
-  var password = $('#password').val();
-  console.log('email: '+email);
-  
-  firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-    console.log('error signIn: code '+error.code+" : "+error.message);
-    $('#login-problems').text(error.code+" : "+error.message).show();
-  });*/
-  
+  console.log("redirect to login");
   window.open("https://us-central1-steem-bid-bot.cloudfunctions.net/redirect", "_self");
 }
 
