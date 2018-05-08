@@ -28,12 +28,6 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="User">
-          <a class="nav-link" href="user.html">
-            <i class="fa fa-fw fa-user"></i>
-            <span id="menu-user" class="nav-link-text">User</span>
-          </a>
-        </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Whitelist">
           <a class="nav-link" href="index.html">
             <i class="fa fa-fw fa-users"></i>
@@ -46,7 +40,7 @@
             <span class="nav-link-text">Delegators</span>
           </a>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Delegators">
+        <li class="nav-item hidden" data-toggle="tooltip" data-placement="right" title="Admins" id="menu-admins">
           <a class="nav-link" href="admins.html">
             <i class="fa fa-fw fa-book"></i>
             <span class="nav-link-text">Admins</span>
@@ -70,14 +64,16 @@
   </nav>
   <div class="content-wrapper">
     <div class="container-fluid">
-      <!-- Breadcrumbs-->
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a href="#">Whitelist</a>
-        </li>
-        <li class="breadcrumb-item active">Bot whitelist</li>
-      </ol>
-      
+      <div class="row">        
+        <div class="col-lg-12">
+          <div class="alert alert-danger hidden" id="error-message"></div>          
+        </div>
+      </div>      
+      <div class="row">        
+        <div class="col-lg-12">
+          <div class="alert alert-success hidden" id="success-message"></div>
+        </div>
+      </div>      
       <div class="row">        
         <div class="col-lg-4">
           <div class="card mb-3">
@@ -141,7 +137,8 @@
     <script src="vendor/datatables/jquery.dataTables.js"></script>
     <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin.min.js"></script>
+    
+    <script src="js/sb-admin.min.js"></script>    
     <!-- Custom scripts for this page-->
     
     <!-- firebase -->
@@ -150,8 +147,8 @@
     <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
   
     <script src="js/configFirebase.js"></script>
-    <script src="js/login.js?9"></script>  
-    <script src="js/whitelist.js?6"></script>
+    <script src="js/login.js?11"></script>  
+    <script src="js/whitelist.js?10"></script>
   </div>
 </body>
 

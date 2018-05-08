@@ -4,19 +4,22 @@ var current_key = null;
 
 getQueryAndLogin();
 
-console.log("get whitelist");
 firebase.database().ref(config.bot+'/whitelist').on('value', function(snapshot) {
   whitelist = snapshot.val();
   $('#whitelist').html('');
   first = true;
   for(var key in whitelist) {
-   $('#whitelist').append(itemList(key,whitelist[key]));
-   $('#account-'+key).on('click', function(){  setAccount($(this).attr("id"));  });
+   acc = key.replace(/[,]/g,".");
+   $('#whitelist').append(itemList(acc));
+   $('#account-'+acc).on('click', function(){  setAccount($(this).attr("id"));  });
    if(first){
-     setAccount(key);
+     setAccount(acc);
      first = false;
    }
   }  
+}, function(error){
+  console.log("error loading the whitelist: "+error.message);
+  $('error-message').text('error loading the whitelist: '+error.message).show();
 });
 
 function setAccount(key){
@@ -27,34 +30,35 @@ function setAccount(key){
   if(typeof whitelist[key] === 'undefined'){
     $('#card-header-account').html('');
     $('#card-body-account').html('');
-    console.log("setAccount: undefined key - "+key);
+    console.log("setAccount: undefined user - "+key);
     return;
   }
-  console.log("Setting account @"+whitelist[key]);
-  $('#card-header-account').text('@'+whitelist[key]);
+  console.log("Setting account @"+key);
+  $('#card-header-account').text('@'+key);
   $('#card-body-account').html('<button id="but-delete" type="button" class="btn btn-primary btn-block" onclick="deleteAccount()">Delete</button>');
 }
 
 function deleteAccount(){
   var key = current_key;
-  console.log("Account @"+whitelist[key]+" deleted!");
+  console.log("Account @"+key+" deleted!");
   firebase.database().ref(config.bot+'/whitelist/'+key).set(null);
 }
 
 function addAccount(){
-  var account = $('#new-account').val();
+  var key = $('#new-account').val().toLowerCase();
   console.log("Adding account @"+account);
-  var key = firebase.database().ref('whitelist').push().key;
+  var account = true;
+  key = key.replace(/[.]/g,",");
   firebase.database().ref(config.bot+'/whitelist/'+key).set(account);
 }
 
-function itemList(key,account){
+function itemList(key){
   return ''+
     '<a class="list-group-item list-group-item-action" id="account-'+key+'")">'+
       '<div class="media">'+
-        '<img class="d-flex mr-3 rounded-circle" src="https://steemitimages.com/u/'+account+'/avatar/small" alt="">'+
+        //'<img class="d-flex mr-3 rounded-circle" src="https://steemitimages.com/u/'+key+'/avatar/small" alt="">'+
         '<div class="media-body">'+
-          '<strong>'+account+'</strong>'+
+          '<strong>'+key+'</strong>'+
         '</div>'+
       '</div>'+
     '</a>';
@@ -72,11 +76,16 @@ function getQueryAndLogin(){
         steemconnect_token = x[1];
         
         $.get("https://us-central1-steem-bid-bot.cloudfunctions.net/callback?code="+steemconnect_token, function (data) {
+          if(!data.token){
+            $('error-message').text('An error occurred when logging in').show();
+            return;
+          }
           console.log("response callback token:" + data.token);
           firebase_token = data.token;
           firebase.auth().signInWithCustomToken(firebase_token).catch(function(error) {
             console.log(error.code + ": " + error.message);
-          });        
+            $('#error-message').text(error.code + ": " + error.message).show();
+          });
         });        
       }
     }

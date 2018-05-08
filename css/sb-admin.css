@@ -65,6 +65,10 @@ body.fixed-nav {
   z-index: 1;
 }
 
+.hidden{
+  display: none;
+}
+
 #mainNav .navbar-collapse {
   overflow: auto;
   max-height: 75vh;

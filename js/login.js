@@ -1,18 +1,28 @@
+var logged = false;
+var username = '';
 
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     // User is signed in
     console.log("logged in "+user.uid);
-    name = user.uid.replace("steemconnect:","");    
-    $("#nav-user").html(imgUser(name));
+    username = user.uid.replace("steemconnect:",""); 
+    checkIfAdmin();    
+    $("#nav-user").html(imgUser(username));
     $("#nav-user").show();
     $("#nav-login").hide();
     $("#nav-logout").show();    
+    $('#menu-user-name').text('@'+username);
+    $('#menu-user').show();
+    logged = true;
   } else {
     console.log("logged out");
+    username = '';
     $("#nav-user").hide();
     $("#nav-login").show();
     $("#nav-logout").hide();    
+    $('#menu-user').hide();
+    $('#menu-admins').hide();
+    logged = false;
   }
 });
 
@@ -24,9 +34,19 @@ function login(){
 function logout(){
   console.log("Trying to logout");
   firebase.auth().signOut().then(function() {
-    
+    $('#error-message').hide();
+    $('#success-message').text('Logged out successfully').show();
   }).catch(function(error) {
     console.log("Error trying to logout: "+error.message);
+    $('#error-message').text(error.message).show();
+    $('#success-message').hide();
+  });
+}
+
+function checkIfAdmin(){
+  firebase.database().ref(config.bot+'/admins').on('value', function(snapshot){
+    $('#menu-admins').show();
+    console.log('@'+username+' is an admin');    
   });
 }
 
