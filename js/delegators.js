@@ -22,7 +22,7 @@ firebase.database().ref(config.bot+'/state').on('value', function(snapshot){
   incomeDaySBD = parseFloat(state.sbd_balance);
   liquid_steem_power = state.steem_reserve_balance >= state.steem_power_balance ? state.steem_power_balance : state.steem_reserve_balance;
   
-  $('#income-day').text('Income of the day: '+incomeDaySTEEM.toFixed(3)+' STEEM + '+incomeDaySBD.toFixed(3)+' SBD.');
+  $('#income-day').text(incomeDaySTEEM.toFixed(3)+' STEEM + '+incomeDaySBD.toFixed(3)+' SBD');
   
   console.log("Income day Steem: "+incomeDaySTEEM);
   console.log("Income day SBD: "+incomeDaySBD);
@@ -52,9 +52,11 @@ firebase.database().ref(config.bot+'/delegators').on('value', function(snapshot)
   
   if(user_is_delegator){
     $('#custom-rewards-option').show();
+    $('#current-delegator').html(tableDelegator(username,delegators[username])).show();
     console.log('@'+username+' is a delegator');
   }else{
     $('#custom-rewards-option').hide();
+    $('#current-delegator).hide();
     console.log('@'+username+' is not a delegator');
   }
   
@@ -96,13 +98,14 @@ function tableDelegator(name,delegator){
   
   pendingPayoutSTEEM += pendingPayoutSP;
   
-  return ''+
-    '<tr>'+
-      '<td>'+name+'</td>'+
-      '<td>'+delegation+'</td>'+
-      '<td>'+pendingPayoutSTEEM.toFixed(3)+'</td>'+
-      '<td>'+pendingPayoutSBD.toFixed(3)+'</td>'+
-    '</tr>';    
+  return ''+  
+    '<div class="table">'+
+      '<div class="field"><div class="crop2"><img src="https://steemitimages.com/u/'+name+'/avatar/small" class="delegators-img"/></div></div>'+
+      '<div class="field">'+name+'</div>'+
+      '<div class="field">'+delegation+'</div>'+
+      '<div class="field">'+pendingPayoutSTEEM.toFixed(3)+'</div>'+
+      '<div class="field">'+pendingPayoutSBD.toFixed(3)+'</div>'+
+    '</div>';   
 }
 
 function saveDelegator(){

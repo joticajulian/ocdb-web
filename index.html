@@ -5,151 +5,91 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
   <title>Operation Curation Bot</title>
-  <!-- Bootstrap core CSS-->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom fonts for this template-->
-  <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-  <!-- Page level plugin CSS-->
-  <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
-  <!-- Custom styles for this template-->
-  <link href="css/sb-admin.css" rel="stylesheet">  
+  <link href="css/main.css" rel="stylesheet">  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
-<body class="fixed-nav sticky-footer bg-dark" id="page-top">
-  
-  <!-- Navigation-->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="index.html">Operation Curation Bot</a>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Whitelist">
-          <a class="nav-link" href="index.html">
-            <i class="fa fa-fw fa-users"></i>
-            <span class="nav-link-text">Whitelist</span>
-          </a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Delegators">
-          <a class="nav-link" href="delegators.html">
-            <i class="fa fa-fw fa-handshake-o"></i>
-            <span class="nav-link-text">Delegators</span>
-          </a>
-        </li>
-        <li class="nav-item hidden" data-toggle="tooltip" data-placement="right" title="Admins" id="menu-admins">
-          <a class="nav-link" href="admins.html">
-            <i class="fa fa-fw fa-book"></i>
-            <span class="nav-link-text">Admins</span>
-          </a>
-        </li>
-      </ul>
-      
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item" id="nav-user">          
-        </li>
-        <li class="nav-item" id="nav-login">
-          <a class="nav-link" onclick="login()">
-            <i class="fa fa-fw fa-sign-in"></i>Log in</a>
-        </li>
-        <li class="nav-item" id="nav-logout">
-          <a class="nav-link" onclick="logout()">
-            <i class="fa fa-fw fa-sign-out"></i>Logout</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-  <div class="content-wrapper">
-    <div class="container-fluid">
-      <div class="row">        
-        <div class="col-lg-12">
-          <div class="alert alert-danger hidden" id="error-message"></div>          
-        </div>
-      </div>      
-      <div class="row">        
-        <div class="col-lg-12">
-          <div class="alert alert-success hidden" id="success-message"></div>
-        </div>
-      </div>      
-      <div class="row">        
-        <div class="col-lg-4">
-          <div class="card mb-3">
-            <div class="card-header">Accounts</div>
-            <div class="list-group list-group-flush small" id="whitelist">              
-            </div>            
-          </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="card mb-3">          
-            <div class="card-header" id="card-header-account"></div>
-            <div class="card-body" id="card-body-account"></div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-12">
-          <form class="form-inline">
-            <div class="form-group">
-            <div class="col-lg-12"><input type="text" class="form-control" id="new-account" placeholder="Account"></div></div>
-            <div class="col-lg-2"><button type="button" class="btn btn-primary btn-block" onclick="addAccount()">Add to whitelist</button></div>            
-          </form>
-        </div>  
-      </div>
-      <div class="row">
-        <div class="col-lg-12">
-          <form class="form-inline my-2 my-lg-0 mr-lg-2">
-            <div class="input-group">
-              <input class="form-control" type="text" placeholder="Search for...">
-              <span class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                  <i class="fa fa-search"></i>
-                </button>
-              </span>
-            </div>
-          </form>
-        </div>
-      </div>      
-    </div>
-    <!-- /.container-fluid-->
-    <!-- /.content-wrapper-->
-    <footer class="sticky-footer">
-      <div class="container">
-        <div class="text-center">
-          <small>Copyright © Operation Curation Bot 2018</small>
-        </div>
-      </div>
-    </footer>
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-      <i class="fa fa-angle-up"></i>
+<body>
+  <div id="main-header">
+    <a id="a-title-bot" href="index.html">
+     <img id="img-bot" src="images/ocd_logo.png"/>
+     <span id="title-bot">Operation Curation Bot</span>
     </a>
     
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-    <!-- Page level plugin JavaScript-->
-    <script src="vendor/chart.js/Chart.min.js"></script>
-    <script src="vendor/datatables/jquery.dataTables.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
-    <!-- Custom scripts for all pages-->
-    
-    <script src="js/sb-admin.min.js"></script>    
-    <!-- Custom scripts for this page-->
-    
-    <!-- firebase -->
-    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-database.js"></script>
-    <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
-  
-    <script src="js/configFirebase.js"></script>
-    <script src="js/login.js?11"></script>  
-    <script src="js/whitelist.js?10"></script>
+    <ul id="login-block">
+      <li class="nav-login" id="nav-login">
+        <a class="button" onclick="login()">Log in</a>
+      </li>
+      <li class="nav-login" id="nav-logout">
+        <a class="button" onclick="logout()">Log out</a>
+      </li>
+    </ul>
   </div>
+  <nav id="main-nav">  
+    <ul id="menu-items">
+      <li class="nav-item" title="Whitelist">
+        <a class="nav-link" href="index.html">
+          <img class="nav-img" src="./images/whitelist-logo.png"/>
+          <span class="nav-link-text">Whitelist</span>
+        </a>
+      </li>
+      <li class="nav-item" title="Delegators">
+        <a class="nav-link" href="delegators.html">
+          <img class="nav-img" src="./images/delegators-logo.png"/>
+          <span class="nav-link-text">Delegators</span>
+        </a>
+      </li>
+      <li class="nav-item hidden" title="Admins">
+        <a class="nav-link" href="admins.html">
+          <img class="nav-img" src="./images/admins-logo.png"/>
+          <span class="nav-link-text">Admins</span>
+        </a>
+      </li>
+    </ul>    
+  </nav>
+  <div class="content-wrapper">
+    <div class="alert-danger hidden" id="error-message"></div>
+    <div class="alert-success hidden" id="success-message"></div>
+    <span class="content-title b">Operation Curation Bot</span>
+    <span class="content-subtitle b">Want to join our whitelist?</span>
+    <ul class="content-description">
+      <li>We are the only <strong>non-profit bot</strong> on the market. This means that <strong>100%</strong> of the SBD received will go straight to our delegators as well as <strong>100%</strong> of the Curation rewards the bot receives, will be <strong>divided</strong> among our delegators.</li>
+      <li>We operate on a unique algorithm than a vote with a <strong>higher</strong> reward than normal bots.</li>
+      <li>We only vote on whitelisted authors. Check out our list bellow!</li>      
+    </ul>
+    <div class="form-add-remove hidden">
+      <input type="text" class="fancy" id="new-account" placeholder="Username to add">
+      <div class="div-button-username">
+        <button type="button" class="button w7" onclick="addAccount()">Add user</button>
+      </div>
+    </div>  
+    <div class="form-add-remove hidden">
+      <input type="text" class="fancy" id="remove-account" placeholder="Username to remove">
+      <div class="div-button-username">
+        <button type="button" class="button w7" onclick="deleteAccount()">Remove user</button>
+      </div>
+    </div>
+  </div>  
+  <div class="divider-transparent"></div>
+  <div class="fancy-container">
+    <div id="title-whitelist">
+      <span id="check-out-text">Check out our whitelist community</span>
+      <div class="r ib">
+        <span id="size-whitelist"></span>
+        <span id="steemians-text">Steemians and Growing!</span>
+      </div>
+    </div>
+    <div id="whitelist"></div>
+  </div>
+    
+  <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-database.js"></script>
+  <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
+  
+  <script src="js/configFirebase.js"></script>
+  <script src="js/login.js?11"></script>  
+  <script src="js/whitelist.js?11"></script>  
 </body>
 
 </html>

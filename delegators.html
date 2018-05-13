@@ -5,192 +5,113 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
   <title>Operation Curation Bot</title>
-  <!-- Bootstrap core CSS-->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom fonts for this template-->
-  <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-  <!-- Page level plugin CSS-->
-  <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
-  <!-- Custom styles for this template-->
-  <link href="css/sb-admin.css" rel="stylesheet">  
+  <link href="css/main.css" rel="stylesheet">  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
-<body class="fixed-nav sticky-footer bg-dark" id="page-top">
-  
-  <!-- Navigation-->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="index.html">Operation Curation Bot</a>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Whitelist">
-          <a class="nav-link" href="index.html">
-            <i class="fa fa-fw fa-users"></i>
-            <span class="nav-link-text">Whitelist</span>
-          </a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Delegators">
-          <a class="nav-link" href="delegators.html">
-            <i class="fa fa-fw fa-handshake-o"></i>
-            <span class="nav-link-text">Delegators</span>
-          </a>
-        </li>
-        <li class="nav-item hidden" data-toggle="tooltip" data-placement="right" title="Admins" id="menu-admins">
-          <a class="nav-link" href="admins.html">
-            <i class="fa fa-fw fa-book"></i>
-            <span class="nav-link-text">Admins</span>
-          </a>
-        </li>
-      </ul>
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item" id="nav-user">          
-        </li>
-        <li class="nav-item" id="nav-login">
-          <a class="nav-link" onclick="login()">
-            <i class="fa fa-fw fa-sign-in"></i>Log in</a>
-        </li>
-        <li class="nav-item" id="nav-logout">
-          <a class="nav-link" onclick="logout()">
-            <i class="fa fa-fw fa-sign-out"></i>Logout</a>
-        </li>        
-      </ul>
-    </div>
-  </nav>
-  <div class="content-wrapper">
-    <div class="container-fluid">
-      <div id="custom-rewards-option">
-      <div class="row">        
-        <div class="col-lg-12">
-          <div class="alert alert-danger hidden" id="error-message"></div>          
-        </div>
-      </div>      
-      <div class="row">        
-        <div class="col-lg-12">
-          <div class="alert alert-success hidden" id="success-message"></div>
-        </div>
-      </div>      
-      
-      <div class="row">        
-        <div class="form-group"> 
-          <div class="col-sm-12">
-            <div class="checkbox">
-              <label><input type="checkbox" id="sbdsteem-rewards">Receive SBD and STEEM payments</label>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <span class="col-sm-6">
-          <span id="percentage-sbd-steem">100%</span>
-        </span>
-        <div class="col-sm-12">
-          <div class="slidecontainer">
-            <input type="range" min="0" max="100" value="100" class="slider" id="slide-sbd-steem">
-          </div>
-        </div>
-      </div>  
-
-      <div class="row">        
-        <div class="form-group"> 
-          <div class="col-sm-12">
-            <div class="checkbox">
-              <label><input type="checkbox" id="curation-rewards">Receive curation payments</label>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <span class="col-sm-6">
-          <span id="percentage-curation">100%</span>
-        </span>
-        <div class="col-sm-12">
-          <div class="slidecontainer">
-            <input type="range" min="0" max="100" value="100" class="slider" id="slide-curation">
-          </div>
-        </div>
-      </div> 
-      
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-2">
-          <button type="button" class="btn btn-primary btn-block" onclick="saveDelegator()">Save</button>
-        </div>                            
-      </div>
-      </div>
-            
-      <div class="row">        
-        <div class="col-lg-12">
-          <div class="card mb-3">
-            <div class="card-header">Delegators</div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Delegation</th>
-                                <th>Pending Payout STEEM</th>
-                                <th>Pending Payout SBD</th>
-                            </tr>
-                        </thead>
-                        <tfoot>
-                            <tr>
-                                <th>Name</th>
-                                <th>Delegation</th>
-                                <th>Pending Payout STEEM</th>
-                                <th>Pending Payout SBD</th>
-                            </tr>
-                        </tfoot>
-                        <tbody id="delegators">
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="card-footer small text-muted" id="income-day"></div>
-          </div>
-        </div>        
-      </div>            
-    </div>
-    <!-- /.container-fluid-->
-    <!-- /.content-wrapper-->
-    <footer class="sticky-footer">
-      <div class="container">
-        <div class="text-center">
-          <small>Copyright © Operation Curation Bot 2018</small>
-        </div>
-      </div>
-    </footer>
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-      <i class="fa fa-angle-up"></i>
+<body>
+  <div id="main-header">
+    <a id="a-title-bot" href="index.html">
+     <img id="img-bot" src="images/ocd_logo.png"/>
+     <span id="title-bot">Operation Curation Bot</span>
     </a>
     
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-    <!-- Page level plugin JavaScript-->
-    <script src="vendor/chart.js/Chart.min.js"></script>
-    <script src="vendor/datatables/jquery.dataTables.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin.min.js"></script>
-    <!-- Custom scripts for this page-->
-    
-    <!-- firebase -->
-    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-database.js"></script>
-    <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
-  
-    <script src="js/configFirebase.js"></script>
-    <script src="js/login.js?11"></script>  
-    <script src="js/delegators.js?24"></script>
+    <ul id="login-block">
+      <li class="nav-login" id="nav-login">
+        <a class="button" onclick="login()">Log in</a>
+      </li>
+      <li class="nav-login" id="nav-logout">
+        <a class="button" onclick="logout()">Log out</a>
+      </li>
+    </ul>
   </div>
+  <nav id="main-nav">  
+    <ul id="menu-items">
+      <li class="nav-item" title="Whitelist">
+        <a class="nav-link" href="index.html">
+          <img class="nav-img" src="./images/whitelist-logo.png"/>
+          <span class="nav-link-text">Whitelist</span>
+        </a>
+      </li>
+      <li class="nav-item" title="Delegators">
+        <a class="nav-link" href="delegators.html">
+          <img class="nav-img" src="./images/delegators-logo.png"/>
+          <span class="nav-link-text">Delegators</span>
+        </a>
+      </li>
+      <li class="nav-item hidden" title="Admins">
+        <a class="nav-link" href="admins.html">
+          <img class="nav-img" src="./images/admins-logo.png"/>
+          <span class="nav-link-text">Admins</span>
+        </a>
+      </li>
+    </ul>    
+  </nav>
+  <div class="content-wrapper">
+    <div class="alert-danger hidden" id="error-message"></div>
+    <div class="alert-success hidden" id="success-message"></div>    
+  </div>
+  
+  <div class="fancy-container">    
+    <div id="total-income" class="r">
+      <span class="content-description ib">Total income for all delegators today!</span>
+      <div class="content-subtitle fancy ib" id="income-day"></div>
+    </div>
+    
+    <div id="custom-rewards-option" class="mb30">
+      <div class="content-subtitle">My delegation contribution</div>
+      <div class="reward-option-content">
+        <div class="fancy">
+          <div class="box-slider">
+            <input type="range" min="0" max="100" value="100" class="slider" id="slide-sbd-steem">
+            <span class="slider-percentage" id="percentage-sbd-steem">100%</span>
+          </div>
+          <label class="label-checkbox"><input type="checkbox" class="checkbox" id="sbdsteem-rewards">Receive SBD and STEEM payments</label>
+        </div>
+        <div class="fancy">
+          <div class="box-slider">
+            <input type="range" min="0" max="100" value="100" class="slider" id="slide-curation">
+            <span class="slider-percentage" id="percentage-curation">100%</span>
+          </div>
+          <label class="label-checkbox"><input type="checkbox" class="checkbox" id="curation-rewards">Receive curation payments</label>
+        </div>
+        <button type="button" class="button" onclick="saveDelegator()">Save</button>
+      </div>
+    </div>       
+      
+    <center><div class="fancy" style="margin-right:0px;" id="current-delegator">
+      <div class="field"><center><img src="https://steemitimages.com/u/jga/avatar/small" class="delegators-img"/></center></div>
+      <div class="field">jga</div>
+      <div class="field">200 SP</div>
+      <div class="field">0.005 STEEM</div>
+      <div class="field">0.005 SBD</div>
+    </div></center>    
+    
+    <center><div class="table-title">
+      <div class="field">Delegators</div>
+      <div class="field">Name</div>
+      <div class="field">Delegation</div>
+      <div class="field">Pending payout - STEEM</div>
+      <div class="field">Pending payout - SBD</div>
+    </div>
+    <div id="delegators"></div>
+    </center>    
+
+     <!-- <tbody id="delegators"> --> 
+      
+    
+    
+    
+    
+    
+  <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-database.js"></script>
+  <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
+  
+  <script src="js/configFirebase.js"></script>
+  <script src="js/login.js?11"></script>  
+  <script src="js/delegators.js?12"></script>  
 </body>
 
 </html>

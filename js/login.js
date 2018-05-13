@@ -13,6 +13,8 @@ firebase.auth().onAuthStateChanged(function(user) {
     $("#nav-logout").show();    
     $('#menu-user-name').text('@'+username);
     $('#menu-user').show();
+    
+    $('.form-add-remove').show();
     logged = true;
   } else {
     console.log("logged out");
@@ -22,6 +24,8 @@ firebase.auth().onAuthStateChanged(function(user) {
     $("#nav-logout").hide();    
     $('#menu-user').hide();
     $('#menu-admins').hide();
+    
+    $('.form-add-remove').hide();
     logged = false;
   }
 });
