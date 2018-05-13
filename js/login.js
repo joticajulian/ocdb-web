@@ -55,8 +55,5 @@ function checkIfAdmin(){
 }
 
 function imgUser(account){
-  return ''+
-    '<div class="media">'+
-      '<img class="d-flex mr-3 rounded-circle" src="https://steemitimages.com/u/'+account+'/avatar/small" alt="">'+
-    '</div>';
+  return '<div class="cropnav"><img src="https://steemitimages.com/u/'+account+'/avatar/small"/></div></div>';
 }

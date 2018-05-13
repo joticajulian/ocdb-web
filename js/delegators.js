@@ -13,7 +13,7 @@ firebase.database().ref(config.bot+'/globalPropertiesSteem').on('value', functio
   console.log("steem_per_mvests: "+steem_per_mvests);
 }, function(error){
   console.log("error loading globalPropertiesSteem: "+error.message);
-  $('error-message').text('error loading globalPropertiesSteem: '+error.message).show();
+  $('#error-message').text('error loading globalPropertiesSteem: '+error.message).show();
 });
 
 firebase.database().ref(config.bot+'/state').on('value', function(snapshot){
@@ -29,7 +29,7 @@ firebase.database().ref(config.bot+'/state').on('value', function(snapshot){
   console.log("Income day SP: "+liquid_steem_power);
 }, function(error){
   console.log("error loading state: "+error.message);
-  $('error-message').text('error loading state: '+error.message).show();
+  $('#error-message').text('error loading state: '+error.message).show();
 });
 
 firebase.database().ref(config.bot+'/delegators').on('value', function(snapshot) {
@@ -52,11 +52,11 @@ firebase.database().ref(config.bot+'/delegators').on('value', function(snapshot)
   
   if(user_is_delegator){
     $('#custom-rewards-option').show();
-    $('#current-delegator').html(tableDelegator(username,delegators[username])).show();
+    $('#current-delegator').html(tableDelegator(username,delegators[username],true)).show();
     console.log('@'+username+' is a delegator');
   }else{
     $('#custom-rewards-option').hide();
-    $('#current-delegator).hide();
+    $('#current-delegator').hide();
     console.log('@'+username+' is not a delegator');
   }
   
@@ -67,12 +67,24 @@ firebase.database().ref(config.bot+'/delegators').on('value', function(snapshot)
   for(var d in delegators) $('#delegators').append(tableDelegator(d,delegators[d]));  
 }, function(error){
   console.log("error loading delegators: "+error.message);
-  $('error-message').text('error loading delegators: '+error.message).show();
+  $('#error-message').text('error loading delegators: '+error.message).show();
 });
+
+$(function(){
+  $('#slide-sbd-steem').on("change", function(event, ui) {
+    console.log("new percentage sbd="+this.value);
+    $('#percentage-sbd-steem').text(this.value + "%");
+  });
+  
+  $('#slide-curation').on("change", function(event, ui) {
+    console.log("new percentage curation="+this.value);
+    $('#percentage-curation').text(this.value + "%");
+  });
+});  
 
 function vestsToSP(vests) { return vests / 1000000 * steem_per_mvests; }
 
-function tableDelegator(name,delegator){
+function tableDelegator(name,delegator,fancy){
   var vesting_shares = parseFloat(delegator.vesting_shares);
   
   var delegation = vestsToSP(vesting_shares).toFixed(3) + ' SP';
@@ -98,8 +110,13 @@ function tableDelegator(name,delegator){
   
   pendingPayoutSTEEM += pendingPayoutSP;
   
+  var divclass = 'table';
+  if(fancy){
+    divclass = '';
+  }
+  
   return ''+  
-    '<div class="table">'+
+    '<div class="'+divclass+'">'+
       '<div class="field"><div class="crop2"><img src="https://steemitimages.com/u/'+name+'/avatar/small" class="delegators-img"/></div></div>'+
       '<div class="field">'+name+'</div>'+
       '<div class="field">'+delegation+'</div>'+
@@ -123,4 +140,3 @@ function saveDelegator(){
     firebase.database().ref(config.bot+'/delegators/'+username+'/curation_reward_percentage').set(percCuration);
   }
 }
-

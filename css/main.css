@@ -57,6 +57,7 @@ a{
 
 .nav-login{
   display: inline-block;
+  vertical-align: middle;
 }
 
 .nav-item{
@@ -171,7 +172,7 @@ a{
 }
 
 .divider-transparent{
-  margin: 35px 0px;
+  margin-top: 35px;
   background-color: rgba(192, 221, 216, 0.5);
   border: solid 1px #979797;
   height: 50px;
@@ -187,7 +188,7 @@ a{
   background-color: rgba(200, 220, 217, 0.7);
   border: solid 2px #50e3c2;
   display:block;
-  margin: 0px 27px;
+  margin: 35px 27px;
   padding: 20px 33px;
 }
 
@@ -272,12 +273,23 @@ a{
   overflow: hidden;
 }
 
+.cropnav{
+  height: 2rem;
+  width: 2rem;
+  overflow: hidden;
+}
+
 .crop img{
   height: 5rem;
 }
 
 .crop2 img{
   height: 3.5rem;
+}
+
+.cropnav img{
+  height: 2rem;
+  border-radius: 50%;
 }
 
 .label-checkbox{

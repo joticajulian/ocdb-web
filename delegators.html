@@ -18,6 +18,8 @@
     </a>
     
     <ul id="login-block">
+      <li class="nav-login" id="nav-user">        
+      </li>
       <li class="nav-login" id="nav-login">
         <a class="button" onclick="login()">Log in</a>
       </li>
@@ -80,21 +82,16 @@
       </div>
     </div>       
       
-    <center><div class="fancy" style="margin-right:0px;" id="current-delegator">
-      <div class="field"><center><img src="https://steemitimages.com/u/jga/avatar/small" class="delegators-img"/></center></div>
-      <div class="field">jga</div>
-      <div class="field">200 SP</div>
-      <div class="field">0.005 STEEM</div>
-      <div class="field">0.005 SBD</div>
+    <center><div class="fancy" style="margin-right:0px;" id="current-delegator">      
     </div></center>    
     
-    <center><div class="table-title">
+    <center><div><div class="table-title">
       <div class="field">Delegators</div>
       <div class="field">Name</div>
       <div class="field">Delegation</div>
       <div class="field">Pending payout - STEEM</div>
       <div class="field">Pending payout - SBD</div>
-    </div>
+    </div></div>
     <div id="delegators"></div>
     </center>    
 
@@ -110,8 +107,8 @@
   <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
   
   <script src="js/configFirebase.js"></script>
-  <script src="js/login.js?11"></script>  
-  <script src="js/delegators.js?12"></script>  
+  <script src="js/login.js?16"></script>  
+  <script src="js/delegators.js?17"></script>  
 </body>
 
 </html>
