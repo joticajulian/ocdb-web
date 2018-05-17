@@ -13,21 +13,33 @@
 <body>
   <div id="main-header">
     <a id="a-title-bot" href="index.html">
-     <img id="img-bot" src="images/ocd_logo.png"/>
-     <span id="title-bot">Operation Curation Bot</span>
+     <img id="img-bot" src="images/ocd_logo2.png"/>
+     <div id="title-bot">Operation Curation Bot</div>
     </a>
     
-    <ul id="login-block">
-      <li class="nav-login" id="nav-user">        
+    <ul class="login-block-desktop">
+      <li class="nav-login hidden" id="nav-user">        
       </li>
-      <li class="nav-login" id="nav-login">
-        <a class="button" onclick="login()">Log in</a>
+      <li class="nav-login hidden" id="nav-login">
+        <button type="button" class="button" onclick="login()">Log in</button>
       </li>
-      <li class="nav-login" id="nav-logout">
-        <a class="button" onclick="logout()">Log out</a>
+      <li class="nav-login hidden" id="nav-logout">
+        <button type="button" class="button" onclick="logout()">Log out</button>
       </li>
     </ul>
+    
+    <ul class="login-block-device">
+      <li class="nav-login-device hidden" id="nav-user-device">        
+      </li>
+      <li class="nav-login-device hidden" id="nav-login-device">
+        <button type="button" class="button" onclick="login()">Log in</button>
+      </li>
+      <li class="nav-login-device hidden" id="nav-logout-device">
+        <button type="button" class="button" onclick="logout()">Log out</button>
+      </li>
+    </ul>    
   </div>
+  
   <nav id="main-nav">  
     <ul id="menu-items">
       <li class="nav-item" title="Whitelist">
@@ -39,7 +51,7 @@
       <li class="nav-item" title="Delegators">
         <a class="nav-link" href="delegators.html">
           <img class="nav-img" src="./images/delegators-logo.png"/>
-          <span class="nav-link-text">Delegators</span>
+          <span class="nav-link-text-underline">Delegators</span>
         </a>
       </li>
       <li class="nav-item hidden" title="Admins">
@@ -55,13 +67,24 @@
     <div class="alert-success hidden" id="success-message"></div>    
   </div>
   
-  <div class="fancy-container">    
-    <div id="total-income" class="r">
-      <span class="content-description ib">Total income for all delegators today!</span>
-      <div class="content-subtitle fancy ib" id="income-day"></div>
+  <div class="fancy-container">
+    <div style="display:block;">  
+    <div class="visibledesktop">
+      <div id="left-total-income"></div>
+      <div class="total-income r" class="mb30">
+        <span class="content-description ib">Total income for all delegators today!</span>
+        <div class="content-subtitle fancy ib" id="income-day"></div>
+      </div>
     </div>
+    <div class="visibledevice">  
+      <div class="total-income" class="b mb30">
+        <span class="content-description ib">Total income for all delegators today!</span>
+        <div class="content-subtitle fancy ib" id="income-day-device"></div>
+      </div>
+    </div>
+        
     
-    <div id="custom-rewards-option" class="mb30">
+    <div id="custom-rewards-option" class="mb30 hidden">
       <div class="content-subtitle">My delegation contribution</div>
       <div class="reward-option-content">
         <div class="fancy">
@@ -80,35 +103,33 @@
         </div>
         <button type="button" class="button" onclick="saveDelegator()">Save</button>
       </div>
-    </div>       
-      
-    <center><div class="fancy" style="margin-right:0px;" id="current-delegator">      
-    </div></center>    
+    </div> 
+    </div>
     
-    <center><div><div class="table-title">
-      <div class="field">Delegators</div>
-      <div class="field">Name</div>
-      <div class="field">Delegation</div>
-      <div class="field">Pending payout - STEEM</div>
-      <div class="field">Pending payout - SBD</div>
-    </div></div>
-    <div id="delegators"></div>
-    </center>    
-
-     <!-- <tbody id="delegators"> --> 
-      
+    <div class="visibledesktop">    
+    <div class="fancy" style="margin-right:0px; display:block;" id="current-delegator">      
+    </div>
     
+    <div class="table-title"><div class="field">Delegators</div><div class="field">Name</div><div class="field">Delegation</div><div class="field">Pending payout - STEEM</div><div class="field">Pending payout - SBD</div></div>
+    <div class="delegators"></div>
+    </div>
     
+    <div class="visibledevice">    
+    <div class="fancy" style="margin-right:0px; display:block;" id="current-delegator-device">      
+    </div>
     
-    
-    
+    <div class="delegators-device"></div>
+    </div>
+  </div>
+  
   <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-database.js"></script>
   <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
   
   <script src="js/configFirebase.js"></script>
-  <script src="js/login.js?16"></script>  
-  <script src="js/delegators.js?17"></script>  
+  <script src="js/utils.js?1"></script>  
+  <script src="js/login.js?20"></script>  
+  <script src="js/delegators.js?26"></script>  
 </body>
 
 </html>

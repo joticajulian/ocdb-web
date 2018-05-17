@@ -14,14 +14,18 @@ firebase.database().ref(config.bot+'/whitelist').on('value', function(snapshot) 
    acc = key.replace(/[,]/g,".");
    $('#whitelist').append(itemList(acc));   
   }
-  $('#size-whitelist').text(size_whitelist);
+  $('.size-whitelist').text(size_whitelist);
 }, function(error){
   console.log("error loading the whitelist: "+error.message);
   $('#error-message').text('error loading the whitelist: '+error.message).show();
 });
 
 function deleteAccount(){
-  var key = $('#remove-account').val().toLowerCase();
+  if(isDesktop()){
+    var key = $('#remove-account').val().toLowerCase();
+  }else{
+    var key = $('#remove-account-device').val().toLowerCase(); 
+  }  
   firebase.database().ref(config.bot+'/whitelist/'+key).set(null)
   .then(function() {
     console.log("Account @"+key+" deleted!");
@@ -36,7 +40,11 @@ function deleteAccount(){
 }
 
 function addAccount(){
-  var key = $('#new-account').val().toLowerCase();
+  if(isDesktop()){
+    var key = $('#new-account').val().toLowerCase();
+  }else{
+    var key = $('#new-account-device').val().toLowerCase();
+  }
   var account = true;
   key = key.replace(/[.]/g,",");
   firebase.database().ref(config.bot+'/whitelist/'+key).set(account)
@@ -54,12 +62,20 @@ function addAccount(){
 
 function itemList(key){
   return ''+
-    '<div class="whitelist-item">'+
-      '<center><div class="crop">'+
-        '<img src="https://steemitimages.com/u/'+key+'/avatar/small" class="whitelist-img"/>'+
-      '</div>'+  
-      '<span class="item-name">'+key+'</span></center>'+
-    '</div>';    
+    '<div class="visibledesktop-inline">'+
+      '<div class="whitelist-item">'+
+        //'<center><div class="crop">'+// style="background-image: url("https://steemitimages.com/u/'+key+'/avatar/small")>'+
+        '<center><div class="crop" style="background-image: url(https://steemitimages.com/u/'+key+'/avatar/small);">'+
+        //  '<img src="https://steemitimages.com/u/'+key+'/avatar/small" class="whitelist-img"/>'+
+        '</div>'+  
+        '<span class="item-name">'+key+'</span></center>'+
+      '</div>'+
+    '</div>'+
+    '<div class="visibledevice">'+    
+      '<div class="whitelist-item-device visibledevice">'+
+        '<span class="item-name-device">'+key+'</span></center>'+
+      '</div>'+
+    '</div>';  
 }
 
 function getQueryAndLogin(){

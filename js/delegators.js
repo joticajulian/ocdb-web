@@ -23,6 +23,7 @@ firebase.database().ref(config.bot+'/state').on('value', function(snapshot){
   liquid_steem_power = state.steem_reserve_balance >= state.steem_power_balance ? state.steem_power_balance : state.steem_reserve_balance;
   
   $('#income-day').text(incomeDaySTEEM.toFixed(3)+' STEEM + '+incomeDaySBD.toFixed(3)+' SBD');
+  $('#income-day-device').text(incomeDaySTEEM.toFixed(3)+' STEEM + '+incomeDaySBD.toFixed(3)+' SBD');
   
   console.log("Income day Steem: "+incomeDaySTEEM);
   console.log("Income day SBD: "+incomeDaySBD);
@@ -47,24 +48,33 @@ firebase.database().ref(config.bot+'/delegators').on('value', function(snapshot)
       $('#curation-rewards').prop('checked', percCuration>0);
       $('#slide-sbd-steem').val(percSBD);
       $('#slide-curation').val(percCuration);
+      $('#percentage-sbd-steem').text(percSBD + "%");
+      $('#percentage-curation').text(percCuration + "%");
     }
   }
   
   if(user_is_delegator){
     $('#custom-rewards-option').show();
     $('#current-delegator').html(tableDelegator(username,delegators[username],true)).show();
+    $('#current-delegator-device').html(tableDelegator(username,delegators[username],true,true)).show();
+    //$('#left-total-income').hide();
     console.log('@'+username+' is a delegator');
   }else{
     $('#custom-rewards-option').hide();
     $('#current-delegator').hide();
+    $('#current-delegator-device').hide();
+    //$('#left-total-income').show();
     console.log('@'+username+' is not a delegator');
   }
   
   console.log('Delegators: '+length);
   console.log('Total Vests: '+totalVests);
   
-  $('#delegators').html('');
-  for(var d in delegators) $('#delegators').append(tableDelegator(d,delegators[d]));  
+  $('.delegators').html('');
+  for(var d in delegators){
+    $('.delegators').append(tableDelegator(d,delegators[d]));  
+    $('.delegators-device').append(tableDelegator(d,delegators[d],false,true));
+  } 
 }, function(error){
   console.log("error loading delegators: "+error.message);
   $('#error-message').text('error loading delegators: '+error.message).show();
@@ -84,7 +94,7 @@ $(function(){
 
 function vestsToSP(vests) { return vests / 1000000 * steem_per_mvests; }
 
-function tableDelegator(name,delegator,fancy){
+function tableDelegator(name,delegator,fancy,device){
   var vesting_shares = parseFloat(delegator.vesting_shares);
   
   var delegation = vestsToSP(vesting_shares).toFixed(3) + ' SP';
@@ -115,9 +125,25 @@ function tableDelegator(name,delegator,fancy){
     divclass = '';
   }
   
+  if(device){
+  
   return ''+  
     '<div class="'+divclass+'">'+
-      '<div class="field"><div class="crop2"><img src="https://steemitimages.com/u/'+name+'/avatar/small" class="delegators-img"/></div></div>'+
+      '<div class="field-device50"><div class="crop2" style="background-image: url(https://steemitimages.com/u/'+name+'/avatar/small);"></div></div>'+
+      //><img src="https://steemitimages.com/u/'+name+'/avatar/small"      class="delegators-img"/></div></div>'+
+      '<div class="field-device">'+
+      '<div class="field-device33 bold">'+name+'</div>'+
+      '<div class="field-device33">Del: '+delegation+'</div>'+
+      '<div class="field-device33">'+pendingPayoutSTEEM.toFixed(3)+' STEEM</div>'+
+      '<div class="field-device33">'+pendingPayoutSBD.toFixed(3)+' SBD</div>'+
+      '</div>'+
+    '</div>';   
+  
+  }
+  
+  return ''+  
+    '<div class="'+divclass+'">'+
+      '<div class="field"><div class="crop2" style="background-image: url(https://steemitimages.com/u/'+name+'/avatar/small);"></div></div>'+
       '<div class="field">'+name+'</div>'+
       '<div class="field">'+delegation+'</div>'+
       '<div class="field">'+pendingPayoutSTEEM.toFixed(3)+'</div>'+

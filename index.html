@@ -13,27 +13,39 @@
 <body>
   <div id="main-header">
     <a id="a-title-bot" href="index.html">
-     <img id="img-bot" src="images/ocd_logo.png"/>
-     <span id="title-bot">Operation Curation Bot</span>
+     <img id="img-bot" src="images/ocd_logo2.png"/>
+     <div id="title-bot">Operation Curation Bot</div>
     </a>
     
-    <ul id="login-block">
-      <li class="nav-login" id="nav-user">        
+    <ul class="login-block-desktop">
+      <li class="nav-login hidden" id="nav-user">        
       </li>
-      <li class="nav-login" id="nav-login">
-        <a class="button" onclick="login()">Log in</a>
+      <li class="nav-login hidden" id="nav-login">
+        <button type="button" class="button" onclick="login()">Log in</button>
       </li>
-      <li class="nav-login" id="nav-logout">
-        <a class="button" onclick="logout()">Log out</a>
+      <li class="nav-login hidden" id="nav-logout">
+        <button type="button" class="button" onclick="logout()">Log out</button>
       </li>
     </ul>
+    
+    <ul class="login-block-device">
+      <li class="nav-login-device hidden" id="nav-user-device">        
+      </li>
+      <li class="nav-login-device hidden" id="nav-login-device">
+        <button type="button" class="button" onclick="login()">Log in</button>
+      </li>
+      <li class="nav-login-device hidden" id="nav-logout-device">
+        <button type="button" class="button" onclick="logout()">Log out</button>
+      </li>
+    </ul>
+    
   </div>
   <nav id="main-nav">  
     <ul id="menu-items">
       <li class="nav-item" title="Whitelist">
         <a class="nav-link" href="index.html">
           <img class="nav-img" src="./images/whitelist-logo.png"/>
-          <span class="nav-link-text">Whitelist</span>
+          <span class="nav-link-text-underline">Whitelist</span>
         </a>
       </li>
       <li class="nav-item" title="Delegators">
@@ -53,33 +65,74 @@
   <div class="content-wrapper">
     <div class="alert-danger hidden" id="error-message"></div>
     <div class="alert-success hidden" id="success-message"></div>
-    <span class="content-title b">Operation Curation Bot</span>
-    <span class="content-subtitle b">Want to join our whitelist?</span>
-    <ul class="content-description">
-      <li>We are the only <strong>non-profit bot</strong> on the market. This means that <strong>100%</strong> of the SBD received will go straight to our delegators as well as <strong>100%</strong> of the Curation rewards the bot receives, will be <strong>divided</strong> among our delegators.</li>
-      <li>We operate on a unique algorithm than a vote with a <strong>higher</strong> reward than normal bots.</li>
-      <li>We only vote on whitelisted authors. Check out our list bellow!</li>      
-    </ul>
-    <div class="form-add-remove hidden">
-      <input type="text" class="fancy" id="new-account" placeholder="Username to add">
-      <div class="div-button-username">
-        <button type="button" class="button w7" onclick="addAccount()">Add user</button>
+    <div class="visibledesktop-inline ocdb-description">
+      <span class="content-title b">Operation Curation Bot</span>
+      <span class="content-subtitle b">Want to join our whitelist?</span>
+      <ul class="content-description">
+        <li>We are the only <strong>non-profit bot</strong> on the market.</li>
+        <li>This means that <strong>100%</strong> of the SBD received will go straight to our delegators as well as <strong>100%</strong> of the Curation rewards the bot receives, will be <strong>divided</strong> among our delegators.</li>
+        <li>We operate on a unique algorithm than a vote with a <strong>higher</strong> reward than normal bots.</li>
+        <li>We only vote on <strong>whitelisted</strong> authors. Check out our list below!</li>      
+      </ul>
+    </div>
+    <div class="visibledevice">
+      <span class="content-title b">Operation Curation Bot</span>
+      <span class="content-subtitle b">Want to join our whitelist?</span>
+      <ul class="content-description">
+        <li>We are the only <strong>non-profit bot</strong> on the market.</li>
+        <li>This means that <strong>100%</strong> of the SBD received will go straight to our delegators as well as <strong>100%</strong> of the Curation rewards the bot receives, will be <strong>divided</strong> among our delegators.</li>
+        <li>We operate on a unique algorithm than a vote with a <strong>higher</strong> reward than normal bots.</li>
+        <li>We only vote on <strong>whitelisted</strong> authors. Check out our list below!</li>      
+      </ul>
+    </div>
+    
+    <div class="visibledesktop">
+      <div class="form-add-remove hidden">
+        <input type="text" class="fancy w7" id="new-account" placeholder="Enter a username">
+        <div class="div-button-username">
+          <button type="button" class="button w7" onclick="addAccount()">Add user</button>
+        </div>        
       </div>
-    </div>  
-    <div class="form-add-remove hidden">
-      <input type="text" class="fancy" id="remove-account" placeholder="Username to remove">
-      <div class="div-button-username">
-        <button type="button" class="button w7" onclick="deleteAccount()">Remove user</button>
+      <div class="form-add-remove hidden">
+        <input type="text" class="fancy w7" id="remove-account" placeholder="Enter a username">
+        <div class="div-button-username">
+          <button type="button" class="button w7" onclick="deleteAccount()">Remove user</button>
+        </div>
       </div>
     </div>
+    <div class="visibledevice">
+      <div class="form-add-remove-device hidden">
+        <input type="text" class="fancy w50 input" id="new-account-device" placeholder="Enter a username">
+        <div class="div-button-username w100">
+          <button type="button" class="button w50" onclick="addAccount()">Add user</button>
+        </div>        
+      </div>
+      <div class="form-add-remove-device hidden">
+        <input type="text" class="fancy w50 input" id="remove-account-device" placeholder="Enter a username">
+        <div class="div-button-username w100">
+          <button type="button" class="button w50" onclick="deleteAccount()">Remove user</button>
+        </div>
+      </div>
+    </div>
+    
   </div>  
-  <div class="divider-transparent"></div>
   <div class="fancy-container">
-    <div id="title-whitelist">
-      <span id="check-out-text">Check out our whitelist community</span>
-      <div class="r ib">
-        <span id="size-whitelist"></span>
-        <span id="steemians-text">Steemians and Growing!</span>
+    <div class="visibledesktop">
+      <div class="title-whitelist">
+        <span id="check-out-text">Check out our whitelist community</span>
+        <div class="r ib">
+          <span class="size-whitelist"></span>
+          <span id="steemians-text">Steemians and Growing!</span>
+        </div>
+      </div>
+    </div>
+    <div class="visibledevice">
+      <div class="title-whitelist-device">
+        <span id="check-out-text-device">Check out our whitelist community</span>
+        <div class="b">
+          <span class="size-whitelist"></span>
+          <span id="steemians-text">Steemians and Growing!</span>
+        </div>
       </div>
     </div>
     <div id="whitelist"></div>
@@ -90,8 +143,9 @@
   <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
   
   <script src="js/configFirebase.js"></script>
-  <script src="js/login.js?16"></script>  
-  <script src="js/whitelist.js?16"></script>  
+  <script src="js/utils.js?1"></script>  
+  <script src="js/login.js?20"></script>
+  <script src="js/whitelist.js?18"></script>  
 </body>
 
 </html>
