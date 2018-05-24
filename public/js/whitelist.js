@@ -6,7 +6,7 @@ var size_whitelist = 0;
 getQueryAndLogin();
 
 if(!isDesktop()){
-  $('whitelist').css('overflow-y','hidden');
+  $('#whitelist').css('overflow-y','hidden');
 }
 
 firebase.database().ref(config.bot+'/whitelist').on('value', function(snapshot) {
@@ -68,16 +68,14 @@ function itemList(key){
   return ''+
     '<div class="visibledesktop-inline">'+
       '<div class="whitelist-item">'+
-        //'<center><div class="crop">'+// style="background-image: url("https://steemitimages.com/u/'+key+'/avatar/small")>'+
-        '<center><div class="crop" style="background-image: url(https://steemitimages.com/u/'+key+'/avatar/small);">'+
-        //  '<img src="https://steemitimages.com/u/'+key+'/avatar/small" class="whitelist-img"/>'+
-        '</div>'+  
-        '<span class="item-name">'+key+'</span></center>'+
+        '<center><a href="https://steemit.com/@'+key+'"><div class="crop" style="background-image: url(https://steemitimages.com/u/'+key+'/avatar/small);">'+
+        '</div></a>'+  
+        '<span class="item-name"><a href="https://steemit.com/@'+key+'">'+key+'</a></span></center>'+
       '</div>'+
     '</div>'+
     '<div class="visibledevice">'+    
       '<div class="whitelist-item-device visibledevice">'+
-        '<span class="item-name-device">'+key+'</span></center>'+
+        '<span class="item-name-device"><a href="https://steemit.com/@'+key+'">'+key+'</a></span></center>'+
       '</div>'+
     '</div>';  
 }

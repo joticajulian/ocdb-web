@@ -336,8 +336,11 @@ a{
 
 .whitelist-item{
   display: inline-block;
-  margin: 10px;
+  /*margin: 10px;*/
   width: 7rem;
+  
+  margin: 2px;
+  margin-bottom: 20px;  
 }
 
 .whitelist-item-device{
@@ -408,6 +411,7 @@ a{
   color: #343232;
   font-size:1rem;
   margin-top: 5px;
+  text-shadow: 0 2px 6px #ffffff;
 }
 
 .item-name-device{
@@ -424,6 +428,7 @@ a{
   background-size: cover;
   background-position: center center;
   border-radius: 50%;
+  border: 0.8px outset #50e3c2;  
 }
 
 .crop2{
@@ -545,7 +550,7 @@ a{
   padding: 6px 13px;
   height: 4.3rem; 
   font-weight: bold; 
-  color: #646363;  
+  color: #332d2d;  
   box-sizing: border-box;
 }
 
@@ -554,8 +559,10 @@ a{
   vertical-align: middle;
   align-items: center;
   width: 20%;
+  padding: 6px 13px;
+  box-sizing: border-box;
   height: 4.3rem;
-  color: #646363;
+  color: #332d2d;
 }
 
 .field{
@@ -567,7 +574,7 @@ a{
   box-sizing: border-box;
   height: 4.3rem;
   background-color: rgba(255, 255, 255, 0.3);
-  color: #646363;
+  color: #332d2d;
   /*border: solid 1px #50e3c2;  */
   border-right-color: #50e3c2;
   border-right-style: solid;
@@ -604,8 +611,12 @@ a{
   vertical-align: middle;    
 }
 
-::-webkit-scrollbar {
-  width: 17px;
+html ::-webkit-scrollbar {
+  width: 0px;
+}
+
+div *::-webkit-scrollbar {
+  width: 17px;  
 }
 
 /* Track */
