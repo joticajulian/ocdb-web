@@ -79,6 +79,7 @@ firebase.database().ref(config.bot+'/delegators').on('value', function(snapshot)
   $('.delegators').html('');
   var i=1;
   for(var d in delegators){
+    if(!isActiveDelegator(delegators[d])) continue;
     $('.delegators').append(tableDelegator(d,delegators[d],i+'.'));  
     $('.delegators-device').append(tableDelegator(d,delegators[d],i+'.',false,true));
     i++;
@@ -111,6 +112,12 @@ $(function(){
 });  
 
 function vestsToSP(vests) { return vests / 1000000 * steem_per_mvests; }
+
+function isActiveDelegator(delegator){
+  var vesting_shares = parseFloat(delegator.vesting_shares);
+  if(typeof delegator.new_vesting_shares === 'undefined' && vesting_shares == 0) return false;
+  return true;  
+}
 
 function tableDelegator(name,delegator,number,fancy,device){
   var vesting_shares = parseFloat(delegator.vesting_shares);
