@@ -14,9 +14,9 @@ firebase.database().ref(config.bot+'/whitelist').on('value', function(snapshot) 
   $('#whitelist').html('');
   size_whitelist = 0;
   for(var key in whitelist) {
-   size_whitelist++;
-   acc = key.replace(/[,]/g,".");
-   $('#whitelist').append(itemList(acc));   
+    size_whitelist++;
+    acc = key.replace(/[,]/g,".");
+    $('#whitelist').append(itemList(acc));   
   }
   $('.size-whitelist').text(size_whitelist);
 }, function(error){
@@ -49,7 +49,12 @@ function addAccount(){
   }else{
     var key = $('#new-account-device').val().toLowerCase();
   }
-  var account = true;
+  
+  var yesterday = (new Date()).getTime() - 1000*60*60*24;
+  var account = {
+    last_bid: yesterday,
+  };
+  
   key = key.replace(/[.]/g,",");
   firebase.database().ref(config.bot+'/whitelist/'+key).set(account)
   .then(function() {

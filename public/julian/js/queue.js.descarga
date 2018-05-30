@@ -1,0 +1,28 @@
+
+
+
+function itemList(bid){
+  return ''+
+    '<div class="visibledesktop">'+
+      '<div class="bid-item">'+
+        '<a href="https://steemit.com/@'+bid.author+'">'+
+          '<div class="crop" style="background-image: url(https://steemitimages.com/u/'+bid.author+'/avatar/small);">'+
+          '</div>'+
+        '</a>'+  
+        '<span class="bid-item-name"><a href="https://steemit.com/@'+bid.author+'">jga</a></span>'+
+        '<div class="bid-title"><a href="https://steemit.com/utopian-io/@jga/introducing-check-votes-a-tool-to-see-which-curators-support-the-posts-of-your-community-more-often">Introducing Check Votes - A tool to see which curators support the posts of your community more often</a></div>'+
+        '<div class="time-vote">vote in 35 min</div>'+
+      '</div>'+
+    '</div>'+
+    '<div class="visibledevice">'+
+      '<div class="bid-item">'+
+        '<a href="https://steemit.com/@jga">'+
+          '<div class="crop" style="background-image: url(https://steemitimages.com/u/jga/avatar/small);">'+
+          '</div>'+
+        '</a>'+  
+        '<span class="bid-item-name"><a href="https://steemit.com/@jga">jga</a></span>'+
+        '<div class="bid-title"><a href="https://steemit.com/utopian-io/@jga/introducing-check-votes-a-tool-to-see-which-curators-support-the-posts-of-your-community-more-often">Introducing Check Votes - A tool to see which curators support the posts of your community more often</a></div>'+
+        '<div class="time-vote">vote in 35 min</div>'+
+      '</div>'+
+    '</div>';
+}

@@ -503,10 +503,6 @@ a{
   margin-bottom: 30px;
 }
 
-.h1{
-  height: 1rem;
-}
-
 .h35{
   height: 3.5rem;
 }
@@ -517,10 +513,6 @@ a{
 
 .h10{
   height: 10rem;
-}
-
-.vw70{
-  width: vw70;
 }
 
 .table-title{
@@ -649,90 +641,33 @@ div *::-webkit-scrollbar {
 }
 
 
+
+
 /* QUEUE */
 
-#current-round{
+.current-round{
   display: block;
-  margin-top: 15px;
-  overflow-y: auto; 
-  overflow-x: hidden;
-}
-
-#current-round-title{
-  display: block;
-  margin-top: 15px;
 }
 
 .bid-item{
   display: block;
 }
 
-.picture-profile{
-  display: inline-flex;
-  vertical-align: middle;
-  align-items: center;
-  box-sizing: border-box;
-  width: 7%;
-}
-
 .bid-item-name{
-  display: inline-flex;
-  vertical-align: middle;
-  align-items: center;
-  box-sizing: border-box;
-  width: 15%;
   color: #343232;
   font-size:1rem;
   margin-top: 5px;
-  text-shadow: 0 2px 6px #ffffff;   
-}
-
-.bid-item-name-device{
-  display: block;
-  vertical-align: middle;
-  font-size:0.9rem;
-  font-weight: bold; 
-  margin-bottom:5px;
-  margin-left:auto;
-  margin-right:auto;
+  text-shadow: 0 2px 6px #ffffff; 
 }
 
 .bid-title{
-  display: inline-flex;
-  vertical-align: middle;
-  align-items: center;
-  box-sizing: border-box;
   color: #343232;
   font-size:1rem;
   margin-top: 5px;
   text-shadow: 0 2px 6px #ffffff;
-  width: 45%;
-}
-
-.bid-amount{
-  display: inline-flex;
-  vertical-align: middle;
-  align-items: center;
-  box-sizing: border-box;
-  color: #343232;
-  font-size:1rem;
-  margin-top: 5px;
-  text-shadow: 0 2px 6px #ffffff;
-  width: 15%;
+  width: 50%;
 }
 
 .time-vote{
-  display: inline-flex;
-  vertical-align: middle;
-  align-items: center;
-  box-sizing: border-box;
-  color: #343232;
-  font-size:1rem;
-  margin-top: 5px;
-  text-shadow: 0 2px 6px #ffffff;
-  width: 18%;
-}
-
-.uc{
-  text-transform: uppercase;
+  width: 15%;
 }
