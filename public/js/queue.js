@@ -84,7 +84,7 @@ function itemList(bid,time){
           '</div>'+
         '</a>'+  
         '<div class="bid-item-name"><a href="https://steemit.com/@'+bid.author+'">'+bid.author+'</a></div>'+
-        '<div class="bid-title"><a href="https://steemit.com/'+bid.url+'">'+bid.title+'</a></div>'+
+        '<div class="bid-title"><a href="https://steemit.com'+bid.url+'">'+bid.title+'</a></div>'+
         '<div class="bid-amount">'+bid.amount+' '+bid.currency+'</div>'+
         '<div class="time-vote" data-time="'+time.getTime()+'">'+textNextVote(time)+'</div>'+
       '</div>'+
