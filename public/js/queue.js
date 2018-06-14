@@ -1,11 +1,20 @@
 var rewardBalance;
 var recentClaims;
 var votePowerReserveRate;
+var roi;
 var steemPrice; //coinmarketcap
 var sbdPrice; //coinmarketcap
 var account = null;
 
 loadPrices();
+
+firebase.database().ref(config.bot+'/state/roi').on('value', function(data){
+  roi = data.val();
+  console.log("roi: "+roi);  
+}, function(error){
+  console.log("error loading roi: "+error.message);
+  $('#error-message').text('error loading ROI: '+error.message).show();
+});
 
 firebase.database().ref(config.bot+'/globalPropertiesSteem').on('value', function(snapshot){
   rewardBalance = snapshot.val().reward_balance;

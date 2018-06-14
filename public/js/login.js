@@ -21,7 +21,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     $('.form-add-remove').show();
     $('.form-add-remove-device').show();
     
-    $('.custom-rewards-option').show();
+    //$('.custom-rewards-option').show();
     logged = true;
   } else {
     console.log("logged out");

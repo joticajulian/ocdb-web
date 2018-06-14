@@ -20,10 +20,11 @@ firebase.database().ref(config.bot+'/state').on('value', function(snapshot){
   state = snapshot.val();
   incomeDaySTEEM = parseFloat(state.steem_balance);
   incomeDaySBD = parseFloat(state.sbd_balance);
-  liquid_steem_power = state.steem_reserve_balance >= state.steem_power_balance ? state.steem_power_balance : state.steem_reserve_balance;
+  liquid_steem_power = parseFloat(state.steem_power_balance);
+  //liquid_steem_power = state.steem_reserve_balance >= state.steem_power_balance ? state.steem_power_balance : state.steem_reserve_balance;
   
-  $('#income-day').text(incomeDaySTEEM.toFixed(3)+' STEEM + '+incomeDaySBD.toFixed(3)+' SBD');
-  $('#income-day-device').text(incomeDaySTEEM.toFixed(3)+' STEEM + '+incomeDaySBD.toFixed(3)+' SBD');
+  $('#income-day').text(incomeDaySTEEM.toFixed(3)+' STEEM + '+incomeDaySBD.toFixed(3)+' SBD + '+liquid_steem_power.toFixed(3)+' SP');
+  $('#income-day-device').text(incomeDaySTEEM.toFixed(3)+' STEEM + '+incomeDaySBD.toFixed(3)+' SBD + '+liquid_steem_power.toFixed(3)+' SP');
   
   console.log("Income day Steem: "+incomeDaySTEEM);
   console.log("Income day SBD: "+incomeDaySBD);
@@ -60,13 +61,13 @@ firebase.database().ref(config.bot+'/delegators').on('value', function(snapshot)
   }
   
   if(user_is_delegator){
-    $('#custom-rewards-option').show();
+    $('.custom-rewards-option').show();
     $('#left-custom-rewards-option').show();
     $('#current-delegator').html(tableDelegator(username,delegators[username],'',true)).show();
     $('#current-delegator-device').html(tableDelegator(username,delegators[username],'',true,true)).show();
     console.log('@'+username+' is a delegator');
   }else{
-    $('#custom-rewards-option').hide();
+    $('.custom-rewards-option').hide();
     $('#left-custom-rewards-option').hide();
     $('#current-delegator').hide();
     $('#current-delegator-device').hide();
@@ -80,6 +81,7 @@ firebase.database().ref(config.bot+'/delegators').on('value', function(snapshot)
   var i=1;
   for(var d in delegators){
     if(!isActiveDelegator(delegators[d])) continue;
+    if(!isDelegatorToShow(delegators[d])) continue;
     $('.delegators').append(tableDelegator(d,delegators[d],i+'.'));  
     $('.delegators-device').append(tableDelegator(d,delegators[d],i+'.',false,true));
     i++;
@@ -119,6 +121,12 @@ function isActiveDelegator(delegator){
   return true;  
 }
 
+function isDelegatorToShow(delegator){
+  var vesting_shares = parseFloat(delegator.vesting_shares);
+  if(vestsToSP(vesting_shares) >= 250) return true;
+  return false;
+}
+
 function tableDelegator(name,delegator,number,fancy,device){
   var vesting_shares = parseFloat(delegator.vesting_shares);
   
@@ -143,7 +151,7 @@ function tableDelegator(name,delegator,number,fancy,device){
   if(isNaN(pendingPayoutSP   ) || pendingPayoutSP    <0) pendingPayoutSP    = 0;
   if(isNaN(pendingPayoutSBD  ) || pendingPayoutSBD   <0) pendingPayoutSBD   = 0;
   
-  pendingPayoutSTEEM += pendingPayoutSP;
+  //pendingPayoutSTEEM += pendingPayoutSP;
   
   var divclass = 'table';
   var field = 'field';
@@ -162,6 +170,7 @@ function tableDelegator(name,delegator,number,fancy,device){
       '<div class="field-device33">Del: '+delegation+'</div>'+
       '<div class="field-device33">'+pendingPayoutSTEEM.toFixed(3)+' STEEM</div>'+
       '<div class="field-device33">'+pendingPayoutSBD.toFixed(3)+' SBD</div>'+
+      '<div class="field-device33">'+pendingPayoutSP.toFixed(3)+' STEEM</div>'+
       '</div>'+
     '</div>';   
   
@@ -174,6 +183,7 @@ function tableDelegator(name,delegator,number,fancy,device){
       '<div class="'+field+'">'+delegation+'</div>'+
       '<div class="'+field+'">'+pendingPayoutSTEEM.toFixed(3)+' STEEM</div>'+
       '<div class="'+field+'">'+pendingPayoutSBD.toFixed(3)+' SBD</div>'+
+      '<div class="'+field+'">'+pendingPayoutSP.toFixed(3)+' STEEM</div>'+
     '</div>';   
 }
 

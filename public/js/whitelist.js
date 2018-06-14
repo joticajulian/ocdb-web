@@ -111,4 +111,15 @@ function getQueryAndLogin(){
       }
     }
   }
+}
+
+function delegate(){
+  if(isDesktop()){
+    var delegator = $('#delegator-account').val().toLowerCase();
+    var amount = parseFloat($('#delegator-amount').val());
+  }else{
+    var delegator = $('#delegator-account-device').val().toLowerCase();
+    var amount = parseFloat($('#delegator-amount-device').val());
+  }
+  window.open('https://steemconnect.com/sign/delegateVestingShares?delegator='+delegator+'&delegatee=ocdb&vesting_shares='+amount.toFixed(3)+'%20SP', '_self');
 }  

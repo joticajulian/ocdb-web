@@ -75,7 +75,8 @@ function getUsdValue(bid) {
 function getWeight(bid){
   var vote_value = getVoteValue(100, account, 10000);
   var vote_value_usd = vote_value / 2 * sbdPrice + vote_value / 2;
-  var weight = Math.round(10000 * getUsdValue(bid) * 2 / (0.75 * vote_value_usd));
+  
+  var weight = Math.round(10000 * roi * getUsdValue(bid)/vote_value_usd);
   weight = weight > 10000 ? 10000 : weight;
   return weight;
 }

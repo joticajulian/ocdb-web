@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Operation Curation Bot</title>
-  <link href="css/main.css?7" rel="stylesheet">  
+  <link href="css/main.css?10" rel="stylesheet">  
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
@@ -119,9 +119,38 @@
           <button type="button" class="button w50" onclick="deleteAccount()">Remove user</button>
         </div>
       </div>
+    </div>    
+  </div>
+  
+  <div class="visibledesktop">
+    <div class="delegation-block">
+      <div style="margin:auto;">
+        <div class="label-delegation">If you'd like to delegate to <span class="bot-name uc">Operation Curation Bot</span></div>
+        <div class="form-delegation">
+          <input type="text" class="fancy w7" id="delegator-account" placeholder="Enter username">
+          <input type="text" class="fancy w7" id="delegator-amount" placeholder="Delegation amount">
+          <div class="div-button-username">
+            <button type="button" class="button w7" onclick="delegate()">Delegate</button>
+          </div>
+        </div>
+      </div>
+    </div>  
+  </div>
+  <div class="visibledevice">
+    <div class="delegation-block">
+      <div style="margin:auto;">
+        <div class="form-delegation-device">
+          <div class="label-delegation">If you'd like to delegate to <span class="bot-name uc">Operation Curation Bot</span></div>
+          <input type="text" class="fancy w50 input" id="delegator-account-device" placeholder="Enter username">
+          <input type="text" class="fancy w50 input" id="delegator-amount-device" placeholder="Delegation amount">
+          <div class="div-button-username w100">
+            <button type="button" class="button w50" onclick="delegate()">Delegate</button>
+          </div>
+        </div>
+      </div>
     </div>
-    
-  </div>  
+  </div>    
+      
   <div class="fancy-container">
     <div class="visibledesktop">
       <div class="title-whitelist">
@@ -150,8 +179,8 @@
   
   <script src="js/configFirebase.js"></script>
   <script src="js/utils.js?3"></script>  
-  <script src="js/login.js?24"></script>
-  <script src="js/whitelist.js?24"></script>  
+  <script src="js/login.js?25"></script>
+  <script src="js/whitelist.js?25"></script>  
 </body>
 
 </html>
