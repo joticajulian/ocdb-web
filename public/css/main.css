@@ -533,6 +533,14 @@ a{
   margin-bottom: 30px;
 }
 
+.mt40{
+  margin-top: 40px;
+}
+
+.mb40{
+  margin-bottom: 40px;
+}
+
 .h1{
   height: 1rem;
 }
@@ -765,4 +773,72 @@ div *::-webkit-scrollbar {
 
 .uc{
   text-transform: uppercase;
+}
+
+
+/* ADMINS */
+
+.delegators{
+  text-align: center;
+}
+
+.debt{
+  text-align: center;
+}
+
+.card-delegator{
+  display: inline-block;
+  margin: 10px;
+}
+
+.header-delegator{
+  display: block;
+  width: 15rem;
+  box-sizing: border-box;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: #d6d6d6;
+  border: solid 1px #387769;
+  padding: 6px 13px;
+}
+
+.crop3{
+  height: 3.1rem;
+  width: 3.1rem;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center center;
+  border-radius: 50%;
+  display: inline-block;  
+  vertical-align: middle;
+}
+
+.item-data{
+  font-size: 1rem;
+}
+
+.title-item{
+  font-weight: bold;
+  color: #387769;
+  display: block;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+.data-delegator{
+  display: block;
+  width: 15rem;
+  box-sizing: border-box;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background-color: #ffffff;
+  border: solid 1px #387769;
+  padding: 6px 13px;
+}
+
+.username{
+  display: inline-block;  
+  text-align: center;
+  font-size: 1.2rem;
+  margin-left: 10px;
 }

@@ -69,9 +69,17 @@ function logout(){
 }
 
 function checkIfAdmin(){
-  firebase.database().ref(config.bot+'/admins').on('value', function(snapshot){
-    $('#menu-admins').show();
-    console.log('@'+username+' is an admin');    
+  firebase.database().ref(config.bot+'/admins').on('value', function(data){
+    var admins = data.val();
+    if(admins['steemconnect:'+username]){
+      $('#admins-tab').removeClass('hidden');
+      console.log('@'+username+' is an admin');    
+    }else{
+      $('#admins-tab').addClass('hidden');
+    }
+  }, function(error){
+    console.log("error admins: "+error.message);
+    $('#error-message').text('error loading admins: '+error.message).show();
   });
 }
 
