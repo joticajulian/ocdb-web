@@ -73,9 +73,11 @@ function checkIfAdmin(){
     var admins = data.val();
     if(admins['steemconnect:'+username]){
       $('#admins-tab').removeClass('hidden');
+      $('#history-tab').removeClass('hidden');
       console.log('@'+username+' is an admin');    
     }else{
       $('#admins-tab').addClass('hidden');
+      $('#history-tab').addClass('hidden');
     }
   }, function(error){
     console.log("error admins: "+error.message);

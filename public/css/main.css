@@ -228,6 +228,36 @@ a{
   vertical-align: middle;
 }
 
+.fancy-gray{
+  display:inline-block;
+  border-radius: 6px;
+  background-color: #dadada;
+  border: solid 1px #50e3c2;
+  padding: 6px 13px;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.fancy-yellow{
+  display:inline-block;
+  border-radius: 6px;
+  background-color: #faff9a;
+  border: solid 1px #50e3c2;
+  padding: 6px 13px;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.fancy-red{
+  display:inline-block;
+  border-radius: 6px;
+  background-color: #fba8a8;
+  border: solid 1px #50e3c2;
+  padding: 6px 13px;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
 .w7{
   width: 7rem;
 }

@@ -9,6 +9,7 @@
   <title>Operation Curation Bot</title>
   <link href="css/main.css?15" rel="stylesheet">  
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdn.steemjs.com/lib/latest/steem.min.js"></script>
 </head>
 
 <body>
@@ -52,7 +53,7 @@
       <li class="nav-item" title="Queue">
         <a class="nav-link" href="queue.html">
           <img class="nav-img" src="./images/queue-logo.png"/>
-          <span class="nav-link-text-underline">Queue</span>
+          <span class="nav-link-text">Queue</span>
         </a>
       </li>
       <li class="nav-item" title="Delegators">
@@ -64,7 +65,7 @@
       <li class="nav-item hidden" id="history-tab" title="History">
         <a class="nav-link" href="history.html">
           <img class="nav-img" src="./images/history-logo.png"/>
-          <span class="nav-link-text">History</span>
+          <span class="nav-link-text-underline">History</span>
         </a>
       </li>
       <li class="nav-item hidden" id="admins-tab" title="Admins">
@@ -75,29 +76,29 @@
       </li>
     </ul>    
   </nav>
+
   <div class="content-wrapper">
     <div class="alert-danger hidden" id="error-message"></div>
     <div class="alert-success hidden" id="success-message"></div>    
   </div>
   
   <div class="fancy-container">
-    <div class="content-subtitle-black h1 ib" style="padding:6px;">Current Queue</div>
+    <div class="content-subtitle-black h1 ib" style="padding:6px;">History</div>
     <div id="current-round-title">
       <div class="visibledesktop">
-        <div class="bid-item fancy bold"><div class="picture-profile"></div><div class="bid-item-name uc">author</div><div class="bid-title uc">title</div><div class="bid-amount uc">bid</div><div class="time-vote uc">vote time left</div></div>
+        <div class="bid-item fancy bold"><div class="picture-profile"></div><div class="bid-item-name uc">author</div><div class="bid-title uc">Description</div><div class="bid-amount uc">bid</div><div class="time-vote uc">Status</div></div>
       </div>
     </div>
-    <div id="current-round"></div>
+    <div id="history"></div>
   </div>
-
+  
   <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-database.js"></script>
   <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
   
-  <script src="./js/configFirebase.js"></script>
-  <script src="./js/utils.js?3"></script>  
-  <script src="./js/login.js?27"></script>
-  <script src="./js/queue.js?3"></script>  
+  <script src="js/configFirebase.js"></script>
+  <script src="js/login.js?27"></script>
+  <script src="js/history.js?1"></script>  
 </body>
 
 </html>
