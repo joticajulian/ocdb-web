@@ -684,6 +684,7 @@ a{
 
 .field-device33{
   display: block;
+  overflow-x: hidden;
   vertical-align: middle;    
 }
 
@@ -771,6 +772,7 @@ div *::-webkit-scrollbar {
   align-items: center;
   box-sizing: border-box;
   color: #343232;
+  overflow-x: hidden;
   font-size:1rem;
   margin-top: 5px;
   text-shadow: 0 2px 6px #ffffff;

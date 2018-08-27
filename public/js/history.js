@@ -222,6 +222,7 @@ function search_in_history(bid){
 
 function itemList(item){
   var status = 'no status';
+  var statusDevice = '';
   var description = item.memo;
   var auxClass = '';
   var titleStatus = '';
@@ -281,9 +282,24 @@ function itemList(item){
         '<div class="bid-item-name"><a href="https://steemit.com/@'+item.user+'">'+item.user+'</a></div>'+
         '<div class="bid-title"><a href="'+item.memo+'">'+description+'</a></div>'+
         '<div class="bid-amount" title="'+item.timestamp[0]+'"><a href="https://steemd.com/tx/' + item.trx_id[0] + '">' + item.amount + '</a></div>'+
-        '<div class="time-vote" '+titleStatus+'>'+status+//'<br><span style="display:block;">('+ids+')</span></div>'+
+        '<div class="time-vote" '+titleStatus+'>'+status+'</div>'+
       '</div>'+
-    '</div>';    
+    '</div>'+    
+    '<div class="visibledevice">'+
+      '<div class="bid-item fancy'+auxClass+'">'+
+        '<div class="field-device" style="width:100%;">'+
+          '<a href="https://steemit.com/@'+item.user+'" class="field-device33">'+
+            '<div class="crop2" style="background-image: url(https://steemitimages.com/u/'+item.user+'/avatar/small);">'+
+            '</div>'+
+          '</a>'+
+          '<div class="bid-item-name-device"><a href="https://steemit.com/@'+item.user+'" style="margin:auto;">'+item.user+'</a></div>'+
+          '<div class="field-device33" style="font-size:0.8rem; margin-bottom:10px;"><a href="'+item.memo+'">'+description+'</a></div>'+
+          '<div class="field-device33" style="font-size:0.8rem;"><a href="https://steemd.com/tx/' + item.trx_id[0] + '">' + item.amount + '</a></div>'+
+          '<div class="field-device33" style="font-size:0.8rem;">'+status+'</div>'+
+        '</div>'+
+      '</div>'+
+    '</div>';
+    
 }
 
 function typeRefund(memo){
