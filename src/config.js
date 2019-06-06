@@ -1,0 +1,15 @@
+const CONFIG_FIREBASE = {
+  apiKey: 'AIzaSyB2GGuYkXEip9Q_BH4DnOEUQN-FscucjEc',
+  authDomain: 'steem-bid-bot.firebaseapp.com',
+  databaseURL: 'https://steem-bid-bot.firebaseio.com',
+  projectId: 'steem-bid-bot',
+  storageBucket: '',
+  messagingSenderId: '111791285606'
+}
+
+const BOT = 'ocdb'
+
+export default{
+  CONFIG_FIREBASE,
+  BOT
+}
