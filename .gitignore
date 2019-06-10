@@ -1,3 +1,4 @@
 /cgi-bin
 /node_modules
 /vendor
+package-lock.json

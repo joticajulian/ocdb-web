@@ -26,6 +26,10 @@ a{
   text-decoration: none;
 }
 
+.nav-link:hover{
+  color: #7aa2cc !important;
+}
+
 #main-header{
   background-color: #ffffff;
   font-size: 1.2rem;  
@@ -50,6 +54,7 @@ a{
 #title-bot{
   vertical-align: middle;
   display: inline-block;
+  color: black;
 }
 
 .login-block-desktop{
@@ -83,7 +88,8 @@ a{
   border: solid 1px #50e3c2;
   color: white;
   padding: 6px 13px;
-  text-align: center;  
+  text-align: center;
+  font-size: 0.9rem;
 }
 
 .nav-login{

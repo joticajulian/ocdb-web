@@ -22,6 +22,16 @@ export default new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
     },
     {
+      path: '/whitelist',
+      name: 'whitelist',
+      component: () => import('./views/Whitelist.vue')
+    },
+    {
+      path: '/whitelist/:user',
+      name: 'whitelist',
+      component: () => import('./views/WhitelistUser.vue')
+    },
+    {
       path: '/history2',
       name: 'history2',
       component: () => import('./views/History2.vue')
