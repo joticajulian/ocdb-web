@@ -14,6 +14,26 @@
           </ul>
         </div>
       </div>
+      <div class="fancy-container">
+        <div class="row">
+          <h5 class="col-md-6 text-light">Check out our whitelist community</h5>
+          <div class="col-md-6 text-right">
+            <h5 class="text-light"><span class="size-whitelist">{{size_whitelist}}</span> Steemians and Growing!</h5>
+          </div>
+        </div>
+        <div class="row" id="whitelist">
+          <div v-for="(account,index) in whitelist" v-bind:key="index" class="whitelist-item">
+            <center>
+              <a :href="account.link">
+                <div class="crop" :style="{backgroundImage: 'url('+account.picture_profile+')' }"></div>
+              </a>
+              <span class="item-name">
+                <a :href="account.link">{{account.name}}</a>
+              </span>
+            </center>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -28,6 +48,8 @@ export default {
 
   data (){
     return {
+      size_whitelist: 0,
+      whitelist: []
     }
   },
 
@@ -38,5 +60,33 @@ export default {
   mixins: [
     SteemClient
   ],
+
+  created() {
+    firebase.initializeApp(Config.CONFIG_FIREBASE)
+    this.loadWhitelist()
+  },
+  
+  methods: {
+    loadWhitelist() {
+      let self = this
+      firebase.database().ref(Config.BOT+'/whitelist').on('value', function(snapshot) {
+        var whitelist = snapshot.val()
+        self.size_whitelist = 0
+        self.whitelist = []
+        for(var key in whitelist) {
+          self.size_whitelist++
+          var name = key.replace(/[,]/g,".")
+          var account = {
+            name: name,
+            link: 'https://steemit.com/@'+name,
+            picture_profile: '"https://steemitimages.com/u/'+name+'/avatar/small"'
+          }
+          self.whitelist.push(account)
+        }
+      }, function(error){
+        console.log("error loading the whitelist: "+error.message);
+      })
+    }
+  }
 }
 </script>
