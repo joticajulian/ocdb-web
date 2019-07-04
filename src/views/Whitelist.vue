@@ -78,7 +78,7 @@ export default {
           var name = key.replace(/[,]/g,".")
           var account = {
             name: name,
-            link: 'https://steemit.com/@'+name,
+            link: '/@'+name, //'https://steemit.com/@'+name,
             picture_profile: '"https://steemitimages.com/u/'+name+'/avatar/small"'
           }
           self.whitelist.push(account)

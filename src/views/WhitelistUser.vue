@@ -2,14 +2,27 @@
   <div>
     <HeaderOCDB/>
     <div class="container">
-      <div v-if="account" class="row mt-4">
-        <div class="profile" :style="this.account.cover_image==''?'background-color: black;':'background-image: url('+this.account.cover_image+');'">
-          <div>
-            <div class="image" :style="'background-image: url('+this.account.profile_image+');'"></div>
-            <div class="name"><h1><strong>@{{this.account.name}}</strong></h1></div>
+      <div v-if="!loading.steem">
+        <div v-if="account" class="row mt-4 fancy-container">
+          <div class="profile" :style="this.account.cover_image==''?'background-color: #00000000;':'background-image: url('+this.account.cover_image+');'">
+            <div>
+              <div class="image" :style="'background-image: url('+this.account.profile_image+');'"></div>
+              <div class="name"><h1><strong>@{{this.account.name}}</strong></h1></div>
+            </div>
           </div>
+          <div v-if="!loading.firebase">
+            <div v-if="ocdb_account">
+              <h2 class="text-center text-light mt-5">You are in the whitelist!</h2>
+              <h4>Last bid: {{ocdb_account.time_last_bid}}</h4>
+            </div>
+            <div v-else>
+              <h2 class="text-center mt-5">Sorry, you are not in the whitelist</h2>
+            </div>
+          </div>
+          <div v-else class="loader"></div>
         </div>
       </div>
+      <div v-else class="loader"></div>
       <div v-if="alert.info" class="alert alert-info" role="alert">{{alert.infoText}}</div>
       <div v-if="alert.success" class="alert alert-success" role="alert" v-html="alert.successText"></div>
       <div v-if="alert.danger"  class="alert alert-danger" role="alert">{{alert.dangerText}}</div>
@@ -28,7 +41,12 @@ export default {
 
   data (){
     return {
-      account: null
+      account: null,
+      ocdb_account: null,
+      loading: {
+        firebase: true,
+        steem: true
+      }
     }
   },
 
@@ -39,19 +57,86 @@ export default {
   mixins: [
     SteemClient
   ],
+
   created() {
     var user = this.$route.params.user
-    this.steem_database_call('get_accounts',[[user]]).then( (result)=>{
+
+    this.loadUserFirebase(user)
+    this.loadUserSteem(user)
+  },
+
+  methods: {
+    loadUserFirebase(username){
+      username = username.replace(/[.]/g,',')
+      let self = this
+      firebase.initializeApp(Config.CONFIG_FIREBASE)
+      firebase.database().ref(Config.BOT+'/whitelist/'+username).on('value', function(snapshot) {
+        self.ocdb_account = snapshot.val()
+        self.ocdb_account.time_last_bid = new Date(self.ocdb_account.last_bid).toISOString().slice(0,-5)
+        console.log('firebase loaded')
+        console.log(self.ocdb_account)
+        self.loading.firebase = false
+      }, function(error){
+        this.showDanger("Error loading from firebase: "+error.message)
+        console.log(error)
+        self.loading.firebase = false
+      })
+    },
+
+    async loadUserSteem(username){
+      let self = this
       try{
+        var result = await this.steem_database_call('get_accounts',[[username]])
+        if(!result || result.length == 0) throw new Error('@'+username+' does not exist')
         result[0].json_metadata = JSON.parse(result[0].json_metadata)
-      }catch(exception){ }
-      result[0].profile_image = Utils.extractUrlProfileImage(result[0].json_metadata);
-      result[0].cover_image = Utils.extractUrlCoverImage(result[0].json_metadata);
-      this.account = result[0]
-      console.log(this.account.profile_image)
-    }).catch( (err)=>{
-      console.log(err)
-    })
+        result[0].profile_image = Utils.extractUrlProfileImage(result[0].json_metadata);
+        result[0].cover_image = Utils.extractUrlCoverImage(result[0].json_metadata);
+        this.account = result[0]
+        this.loading.steem = false
+      }catch(error){
+        this.showDanger('Error loading steem user: '+error.message)
+        console.log(error)
+        this.loading.steem = false
+      }
+    }
   }
 }
 </script>
+
+<style scoped>
+.profile{  
+  text-align: center;
+  display: block;
+  height: 8rem;
+  width: 100%;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center center;
+  color: white;
+  text-shadow: 2px 2px 5px #000000;  
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.image{
+  overflow: hidden;
+  background-size: cover;
+  background-position: center center;
+  padding: 7px;
+  height: 3.5rem;
+  width: 3.5rem;
+  border-radius: 50%;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+.name{
+  display: inline-block;
+  vertical-align: middle;
+}
+.page{
+  display: inline-block;
+  margin: 10px 4px;
+}
+</style>
