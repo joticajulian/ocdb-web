@@ -63,19 +63,41 @@
 </template>
 
 <script>
+import Config from '@/config.js'
+import FirebaseClient from '@/mixins/FirebaseClient.js'
 
 export default {
   name: 'HeaderOCDB',
 
+  mixins: [
+    FirebaseClient
+  ],
+
   methods: {
     login() {
-      alert('logins')
+      if(Config.DEV_LOGIN){
+        this.$store.state.auth = {
+          logged: true,
+          isAdmin: true,
+        }
+        return
+      }
+      console.log("redirect to login")
+      window.open("https://us-central1-steem-bid-bot.cloudfunctions.net/redirect", "_self");
     },
 
     logout() {
-      alert('logout')
+      if(Config.DEV_LOGIN){
+        this.$store.state.auth = {
+          logged: false,
+          isAdmin: false,
+        }
+        return
+      }
+      
+      console.log("Trying to logout")
+      firebase.auth().signOut()
     }
   }
 }
-
 </script>

@@ -17,16 +17,8 @@ const config = {
     IMAGE_HOSTER : 'https://cdn.eftg.eu',
     ELASTIC : 'https://api.eftg.eu/pulsar/',
     CDN : 'https://cdn.eftg.eu/',
-    EFTG_HARDFORK_0_1 : false
-  },
-  'acceptance': {
-    RPC_NODES : [
-      'https://api.steemit.com',
-    ],
-    IMAGE_HOSTER : 'https://cdn.acc.blkcc.xyz',
-    ELASTIC : 'https://api.blkcc.xyz/pulsar/',
-    CDN : 'https://cdn.acc.blkcc.xyz/',
-    EFTG_HARDFORK_0_1 : false
+    EFTG_HARDFORK_0_1 : false,
+    DEV_LOGIN: false
   },
   'development': {
     RPC_NODES : [
@@ -35,7 +27,8 @@ const config = {
     IMAGE_HOSTER : 'https://cdn.dev.blkcc.xyz',
     ELASTIC : 'https://apidev.blkcc.xyz/pulsar/',
     CDN : 'https://cdn.dev.blkcc.xyz/',
-    EFTG_HARDFORK_0_1 : true
+    EFTG_HARDFORK_0_1 : true,
+    DEV_LOGIN: true
   }
 }
 
@@ -79,6 +72,7 @@ export default{
   IMAGE_HOSTER: finalConfig.IMAGE_HOSTER,
   ELASTIC: finalConfig.ELASTIC,
   CDN: finalConfig.CDN,
+  DEV_LOGIN: finalConfig.DEV_LOGIN,
   
   SBD: SBD,
   STEEM: STEEM,
