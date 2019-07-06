@@ -19,6 +19,11 @@ export default new Router({
       component: () => import('./views/Whitelist.vue')
     },
     {
+      path: '/admins',
+      name: 'admins',
+      component: () => import('./views/Admins.vue')
+    },
+    {
       path: '/@:user',
       name: 'whitelist',
       component: () => import('./views/WhitelistUser.vue')

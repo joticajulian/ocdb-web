@@ -8,7 +8,7 @@ export default new Vuex.Store({
   state: {
     auth: {
       logged: false,
-      isAdmin: true,
+      isAdmin: false,
     },
     rpc_node: Config.RPC_NODES[0],
     max_fails: 1,

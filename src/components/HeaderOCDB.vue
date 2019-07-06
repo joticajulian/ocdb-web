@@ -7,7 +7,10 @@
       </router-link>
       
       <ul class="login-block-desktop" v-if="$store.state.auth.logged">
-        <li class="nav-login" id="nav-user">        
+        <li class="nav-login" id="nav-user">
+          <div class="image-profile" 
+           v-bind:style="{ backgroundImage: 'url(' + $store.state.auth.imgUrl + ')' }"                  
+          ></div>      
         </li>
         <li class="nav-login" id="nav-logout">
           <button class="button" @click="logout">Log out</button>
@@ -65,6 +68,7 @@
 <script>
 import Config from '@/config.js'
 import FirebaseClient from '@/mixins/FirebaseClient.js'
+import axios from 'axios'
 
 export default {
   name: 'HeaderOCDB',
@@ -73,12 +77,33 @@ export default {
     FirebaseClient
   ],
 
+  created() {
+    this.getTokenAndLogin()
+  },
+
   methods: {
+    async getTokenAndLogin() {
+      if(this.$route.query && this.$route.query.code){
+        var steemconnect_token = this.$route.query.code
+        console.log('code: '+steemconnect_token)
+        var data = await axios.get('https://us-central1-steem-bid-bot.cloudfunctions.net/callback?code='+steemconnect_token)
+        if(!data.token){
+          console.log('An error occurred when logging in')
+          return;
+        }
+        console.log("response callback token:" + data.token);
+        firebase.auth().signInWithCustomToken(data.token).catch(function(error) {
+          console.log(error.code + ": " + error.message);
+        })
+      }
+    },
+
     login() {
       if(Config.DEV_LOGIN){
         this.$store.state.auth = {
           logged: true,
           isAdmin: true,
+          imgUrl: "'https://steemitimages.com/DQmb2HNSGKN3pakguJ4ChCRjgkVuDN9WniFRPmrxoJ4sjR4'"
         }
         return
       }

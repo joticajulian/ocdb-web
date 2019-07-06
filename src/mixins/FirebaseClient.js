@@ -21,11 +21,12 @@ export default {
           console.log("logged in "+auth.uid);
           auth.username = auth.uid.replace("steemconnect:","");
           auth.logged = true
+          auth.imgUrl = "'https://steemitimages.com/u/"+auth.username+"/avatar/small'"
           self.checkIfAdmin(auth.username);
         } else {
           auth = {
             logged: false,
-            isAdmin: true,
+            isAdmin: false,
           }
           console.log("logged out");
         }

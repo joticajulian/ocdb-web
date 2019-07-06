@@ -909,7 +909,16 @@ div *::-webkit-scrollbar {
   margin-left: 10px;
 }
 
-
+.image-profile {
+  display: inline-block;
+  height: 2rem;
+  width: 2rem;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center center;
+  border-radius: 50%;
+  vertical-align: middle;
+}
 
 
 .loader {

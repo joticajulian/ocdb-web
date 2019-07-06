@@ -10,13 +10,24 @@
               <div class="name"><h1><strong>@{{this.account.name}}</strong></h1></div>
             </div>
           </div>
-          <div v-if="!loading.firebase">
+          <div v-if="!loading.firebase" style="width:100%;">
             <div v-if="ocdb_account">
-              <h2 class="text-center text-light mt-5">You are in the whitelist!</h2>
-              <h4>Last bid: {{ocdb_account.time_last_bid}}</h4>
+              <h2 class="text-center mt-5 mb-3">😃😃 You are in the whitelist 😃😃</h2>
+              <div class="row">
+                <h4 class="col-md-6">Last bid: {{ocdb_account.time_last_bid}}</h4>
+                <div class="col-md-6">
+                  <button v-if="$store.state.auth.isAdmin" class="float-right button" @click="removeUser">Remove User</button>
+                </div>
+              </div>
             </div>
             <div v-else>
-              <h2 class="text-center mt-5">Sorry, you are not in the whitelist</h2>
+              <h2 class="text-center mt-5 mb-3">Sorry, you are not in the whitelist 😕</h2>
+              <div class="row">
+                <h4 class="col-md-6"></h4>
+                <div class="col-md-6">
+                  <button v-if="$store.state.auth.isAdmin" class="float-right button" @click="addUser">Add User</button>
+                </div>
+              </div>
             </div>
           </div>
           <div v-else class="loader"></div>
@@ -72,7 +83,7 @@ export default {
       firebase.initializeApp(Config.CONFIG_FIREBASE)
       firebase.database().ref(Config.BOT+'/whitelist/'+username).on('value', function(snapshot) {
         self.ocdb_account = snapshot.val()
-        self.ocdb_account.time_last_bid = new Date(self.ocdb_account.last_bid).toISOString().slice(0,-5)
+        if(self.ocdb_account) self.ocdb_account.time_last_bid = new Date(self.ocdb_account.last_bid).toISOString().slice(0,-5)
         console.log('firebase loaded')
         console.log(self.ocdb_account)
         self.loading.firebase = false
@@ -98,6 +109,41 @@ export default {
         console.log(error)
         this.loading.steem = false
       }
+    },
+
+    addUser(){
+      var yesterday = new Date().getTime() - 1000*60*60*24
+      var user = {
+        last_bid: yesterday,
+      };
+
+      var username = this.account.name.replace(/[.]/g,",")
+
+      let self = this
+      firebase.database().ref(Config.BOT+'/whitelist/'+username).set(user)
+      .then(function() {
+        console.log("Account @"+username+" added");
+        self.showSuccess('Account added to the whitelist')
+      })
+      .catch(function(error) {
+        console.log('Error: '+error.message)
+        self.showDanger(error.message)
+      })
+    },
+
+    removeUser(){
+      var username = this.account.name.replace(/[.]/g,",")
+
+      let self = this
+      firebase.database().ref(Config.BOT+'/whitelist/'+username).set(null)
+      .then(function() {
+        console.log("Account @"+username+" deleted!")
+        self.showSuccess('Account removed from the whitelist')
+      })
+      .catch(function(error) {
+        console.log('Error: '+error.message)
+        self.showDanger(error.message)
+      })
     }
   }
 }
