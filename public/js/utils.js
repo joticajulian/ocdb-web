@@ -107,6 +107,13 @@ function formatTime(t){
   return t.getFullYear()+'-'+addZero(t.getMonth()+1)+'-'+addZero(t.getDate())+'T'+addZero(t.getHours())+':'+addZero(t.getMinutes())+':'+addZero(t.getSeconds()); 
 }
 
+function getContentHtml(co){
+  converter = new showdown.Converter();
+  try{co=converter.makeHtml(co);}catch(err){}
+  //TODO: links alone --> put in <a> or <img> for images, or youtube video
+  return co;
+}
+
 function addZero(x){
   if(x < 10) return "0"+x;
   else return ""+x;
