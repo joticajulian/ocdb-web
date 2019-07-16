@@ -18,8 +18,8 @@ STATUS_DELEGATION = 11;
 STATUS_PAYMENT = 12;
 
 steemit = 'https://steemit.com';
-var num_trans = 300;
-var no_display = 15; //no display last 15 items
+var num_trans = 500;
+var no_display = 100; //no display last 15 items
 var hist = [];
 
 $(function(){
@@ -76,7 +76,7 @@ steem.api.getAccountHistory(bot.name, -1, num_trans, function (err, result) {
           timestamp: [timestamp],
           status: STATUS_DONATION,
         };      
-      }else if(op[1].memo.substring(0,4).toLowerCase() != 'http'){
+      }else if(op[1].memo.replace(/\s/g,'').substring(0,4).toLowerCase() != 'http'){
         var item = {
           type: 'transfer',
           id: [t_id],
