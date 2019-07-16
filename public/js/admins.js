@@ -37,6 +37,25 @@ firebase.database().ref(config.bot+'/state').on('value', function(snapshot){
   $('#error-message').text('error loading state: '+error.message).show();
 });
 
+firebase.database().ref(config.bot+'/config').on('value', function(snapshot){
+  values = snapshot.val();
+  $('#actual-bids-per-day').text(values.bids_per_day);
+  $('#actual-min-post-age').text(values.min_post_age);
+  $('#actual-max-post-age').text(values.max_post_age);
+  $('#actual-enable-votes').text(values.enable_votes);
+  $('#actual-enable-refunds').text(values.enable_refunds);
+  $('#actual-enable-payments').text(values.enable_payments);
+  console.log("bids_per_day: "+values.bids_per_day);
+  console.log("min_post_age: "+values.min_post_age);
+  console.log("max_post_age: "+values.max_post_age);
+  console.log("enable_votes: "+values.enable_votes);
+  console.log("enable_refunds: "+values.enable_refunds);
+  console.log("enable_payments: "+values.enable_payments);
+}, function(error){
+  console.log("error loading state: "+error.message);
+  $('#error-message').text('error loading state: '+error.message).show();
+});
+
 firebase.database().ref(config.bot+'/max_bid_sbd').on('value', function(snapshot){
   bid = snapshot.val();
   $('#actual-max-bid').text(bid);
