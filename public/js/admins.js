@@ -25,14 +25,35 @@ firebase.database().ref(config.bot+'/state').on('value', function(snapshot){
   
   $('#income-day').text(incomeDaySTEEM.toFixed(3)+' STEEM + '+incomeDaySBD.toFixed(3)+' SBD + '+incomeDaySP.toFixed(3)+' SP');
   $('#liquid-steem-power').text(liquid_steem_power.toFixed(3)+' STEEM');
+  $('#actual-roi').text(state.roi);
   
   console.log("Income day Steem: "+incomeDaySTEEM);
   console.log("Income day SBD: "+incomeDaySBD);
   console.log("Income day SP: "+incomeDaySP);
   console.log("Liquid steem power: "+liquid_steem_power);
+  console.log("ROI: "+state.roi);
 }, function(error){
   console.log("error loading state: "+error.message);
   $('#error-message').text('error loading state: '+error.message).show();
+});
+
+firebase.database().ref(config.bot+'/max_bid_sbd').on('value', function(snapshot){
+  bid = snapshot.val();
+  $('#actual-max-bid').text(bid);
+  console.log("Max bid sbd: "+bid);
+});
+
+firebase.database().ref(config.bot+'/min_bid_sbd').on('value', function(snapshot){
+  bid = snapshot.val();
+  $('#actual-min-bid').text(bid);
+  console.log("Min bid sbd: "+bid);
+});
+
+firebase.database().ref(config.bot+'/comment').on('value', function(snapshot){
+  var comment = snapshot.val();
+  $('#actual-comment').html(getContentHtml(comment));  
+  //$('#actual-comment-preview').text(comment.replace(/\{weight\}/g, '51.35').replace(/\{botname\}/g, 'ocdb').replace(/\{sender\}/g, 'acidyo').replace(/\{author\}/g, 'jga'));
+  console.log("comment: "+comment);
 });
 
 firebase.database().ref(config.bot+'/delegators').on('value', function(snapshot) {
@@ -168,4 +189,89 @@ function itemDelegator(name,delegator){
         '<div class="item-data"><span class="title-item">Total donation:</span>'+totalDonationSBD.toFixed(3)+' SBD<br>'+totalDonationSTEEM.toFixed(3)+' STEEM<br>'+totalDonationSP.toFixed(3)+' SP</div>'+
       '</div>'+
     '</div>';     
+}
+
+function setMinBid(){
+  var bid = parseFloat($('#set-min-bid').val());
+  bid = parseInt(1000*bid) / 1000;
+  if(bid>=0){
+    console.log("Setting min bid: ");
+    console.log(bid);
+    firebase.database().ref(config.bot+'/min_bid_sbd').set(bid)
+    .then(function() {
+      console.log("Successfull");
+      $('#error-message-modify').hide();
+      $('#success-message-modify').text('New min bid: '+bid.toFixed(3)+ ' SBD').show(); 
+    })
+    .catch(function(error) {
+      console.log('Error: '+error.message);
+      $('#success-message-modify').hide();
+      $('#error-message-modify').text('Error: '+error.message).show();
+    });    
+  }else{
+    $('#error-message-modify').text("Error: Number misspelled in min bid").show();
+    $('#success-message-modify').hide();
+  }  
+}
+
+function setMaxBid(){
+  var bid = parseFloat($('#set-max-bid').val());
+  bid = parseInt(1000*bid) / 1000;
+  if(bid>=0){
+    console.log("Setting max bid: ");
+    console.log(bid);
+    firebase.database().ref(config.bot+'/max_bid_sbd').set(bid)
+    .then(function() {
+      console.log("Successfull");
+      $('#error-message-modify').hide();
+      $('#success-message-modify').text('New max bid: '+bid.toFixed(3)+ ' SBD').show();
+    })
+    .catch(function(error) {
+      console.log('Error: '+error.message);
+      $('#success-message-modify').hide();
+      $('#error-message-modify').text('Error: '+error.message).show();
+    });
+  }else{
+    $('#error-message-modify').text("Error: Number misspelled in max bid").show();
+    $('#success-message-modify').hide();
+  }
+}
+
+function setROI(){
+  var roi = parseFloat($('#set-roi').val());
+  if(roi>=0){
+    console.log("Setting ROI: ");
+    console.log(roi);
+    firebase.database().ref(config.bot+'/state/roi').set(roi)
+    .then(function() {
+      console.log("Successfull");
+      $('#error-message-modify').hide();
+    $('#success-message-modify').text('New ROI factor: '+roi).show();
+    })
+    .catch(function(error) {
+      console.log('Error: '+error.message);
+      $('#success-message-modify').hide();
+      $('#error-message-modify').text('Error: '+error.message).show();
+    });
+  }else{
+    $('#error-message-modify').text("Error: Number misspelled in ROI").show();
+    $('#success-message-modify').hide();
+  } 
+}
+
+function setComment(){
+  var comment = $('#set-comment').val();
+  console.log("Setting comment: ");
+  console.log(comment);
+  firebase.database().ref(config.bot+'/comment').set(comment)
+  .then(function() {
+    console.log("Successfull");
+    $('#error-message-modify').hide();
+  $('#success-message-modify').html('New comment: '+comment).show();
+  })
+  .catch(function(error) {
+    console.log('Error: '+error.message);
+    $('#success-message-modify').hide();
+    $('#error-message-modify').text('Error: '+error.message).show();
+  });   
 }

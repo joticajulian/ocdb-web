@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,6 +9,7 @@
   <title>Operation Curation Bot</title>
   <link href="css/main.css?15" rel="stylesheet">  
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.6/showdown.min.js"></script>		
 </head>
 
 <body>
@@ -98,6 +100,45 @@
     </div>
   </div>
   
+  <div class="fancy-container">
+    <div class="form-add-remove" style="text-align: left;">
+        <div class="total-income b mb30 mt40">
+          <span class="content-subtitle-black b">OCDB Settings</span>
+        </div>
+        <div class="mt40">
+          <div><strong>Min bid SBD: </strong><span id="actual-min-bid"></span></div>
+          <input type="text" class="fancy w7" id="set-min-bid" placeholder="Min bid SBD">
+          <div class="div-button-username">
+            <button type="button" class="button w7" onclick="setMinBid()">Set min bid SBD</button>
+          </div>
+        </div>  
+        <div class="mt40">
+          <div><strong>Max bid SBD: </strong><span id="actual-max-bid"></span></div>
+          <input type="text" class="fancy w7" id="set-max-bid" placeholder="Max bid SBD">
+          <div class="div-button-username">
+            <button type="button" class="button w7" onclick="setMaxBid()">Set max bid SBD</button>
+          </div>
+        </div>
+        <div class="mt40">
+          <div><strong>ROI factor: </strong><span id="actual-roi"></span></div>
+          <input type="text" class="fancy w7" id="set-roi" placeholder="ROI">
+          <div class="div-button-username">
+            <button type="button" class="button w7" onclick="setROI()">Set ROI</button>
+          </div>
+        </div>
+        <div class="mt40">
+          <div><strong>Comment: </strong><p class="fancy b" id="actual-comment"></p></div>
+          <!--<div><strong>Render Example: </strong><p id="actual-comment-preview"></p></div>-->
+          <textarea rows="8" cols="60" id="set-comment" class="comment-area" placeholder="Use {weight}% to write the vote weight, @{sender} for the sender of the bid, and @{author} for the author"></textarea>
+          <div class="div-button-username" style="display:block;">
+            <button type="button" class="button w7 mt5" onclick="setComment()">Set Comment</button>
+          </div>
+        </div>
+        <div class="alert-danger hidden" id="error-message-modify"></div>
+        <div class="alert-success hidden" id="success-message-modify"></div>                
+    </div>
+  </div>
+  
   <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-database.js"></script>
   <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
@@ -105,7 +146,7 @@
   <script src="js/configFirebase.js"></script>
   <script src="js/utils.js?3"></script>  
   <script src="js/login.js?27"></script>  
-  <script src="js/admins.js?7"></script>  
+  <script src="js/admins.js?11"></script>  
 </body>
 
 </html>
