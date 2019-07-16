@@ -50,22 +50,31 @@ function addAccount(){
     var key = $('#new-account-device').val().toLowerCase();
   }
   
-  var yesterday = (new Date()).getTime() - 1000*60*60*24;
-  var account = {
-    last_bid: yesterday,
-  };
+  steem.api.getAccounts([key], function (err, result) {
+    if (err || !result || result.length==0) {
+      console.log('Error loading account '+key+': ' + err);
+      $('#success-message').hide();
+      $('#error-message').text('The account "'+key+'" does not exists').show();
+      return;
+    }
   
-  key = key.replace(/[.]/g,",");
-  firebase.database().ref(config.bot+'/whitelist/'+key).set(account)
-  .then(function() {
-    console.log("Account @"+key+" added");
-    $('#success-message').text('@'+key+' added to whitelist').show();
-    $('#error-message').hide();  
-  })
-  .catch(function(error) {
-    console.log('Error: '+error.message);
-    $('#success-message').hide();
-    $('#error-message').text('Error: '+error.message).show();
+    var yesterday = (new Date()).getTime() - 1000*60*60*24;
+    var account = {
+      last_bid: yesterday,
+    };
+  
+    key = key.replace(/[.]/g,",");
+    firebase.database().ref(config.bot+'/whitelist/'+key).set(account)
+    .then(function() {
+      console.log("Account @"+key+" added");
+      $('#success-message').text('@'+key+' added to whitelist').show();
+      $('#error-message').hide();  
+    })
+    .catch(function(error) {
+      console.log('Error: '+error.message);
+      $('#success-message').hide();
+      $('#error-message').text('Error: '+error.message).show();
+    });
   });
 }
 
