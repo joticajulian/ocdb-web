@@ -259,6 +259,72 @@ function setROI(){
   } 
 }
 
+function setBidsPerDay(){
+  var bidsperday = parseFloat($('#set-bids-per-day').val());
+  if(bidsperday>=0){
+    console.log("Setting bids per day: ");
+    console.log(bidsperday);
+    firebase.database().ref(config.bot+'/config/bids_per_day').set(bidsperday)
+    .then(function() {
+      console.log("Successfull");
+      $('#error-message-modify').hide();
+      $('#success-message-modify').text('New bids per day: '+bidsperday).show();
+    })
+    .catch(function(error) {
+      console.log('Error: '+error.message);
+      $('#success-message-modify').hide();
+      $('#error-message-modify').text('Error: '+error.message).show();
+    });
+  }else{
+    $('#error-message-modify').text("Error: Number misspelled in bids per day").show();
+    $('#success-message-modify').hide();
+  } 
+}
+
+function setMinPostAge(){
+  var value = parseFloat($('#set-min-post-age').val());
+  if(value>=0){
+    console.log("Setting min post age: ");
+    console.log(value);
+    firebase.database().ref(config.bot+'/config/min_post_age').set(value)
+    .then(function() {
+      console.log("Successfull");
+      $('#error-message-modify').hide();
+      $('#success-message-modify').text('New min post age: '+secondsToString(value)).show();
+    })
+    .catch(function(error) {
+      console.log('Error: '+error.message);
+      $('#success-message-modify').hide();
+      $('#error-message-modify').text('Error: '+error.message).show();
+    });
+  }else{
+    $('#error-message-modify').text("Error: Number misspelled in min post age").show();
+    $('#success-message-modify').hide();
+  } 
+}
+
+function setMaxPostAge(){
+  var value = parseFloat($('#set-max-post-age').val());
+  if(value>=0){
+    console.log("Setting max post age: ");
+    console.log(value);
+    firebase.database().ref(config.bot+'/config/max_post_age').set(value)
+    .then(function() {
+      console.log("Successfull");
+      $('#error-message-modify').hide();
+      $('#success-message-modify').text('New max post age: '+secondsToString(value)).show();
+    })
+    .catch(function(error) {
+      console.log('Error: '+error.message);
+      $('#success-message-modify').hide();
+      $('#error-message-modify').text('Error: '+error.message).show();
+    });
+  }else{
+    $('#error-message-modify').text("Error: Number misspelled in max post age").show();
+    $('#success-message-modify').hide();
+  } 
+}
+
 function setComment(){
   var comment = $('#set-comment').val();
   console.log("Setting comment: ");

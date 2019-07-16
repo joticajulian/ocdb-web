@@ -127,6 +127,27 @@
           </div>
         </div>
         <div class="mt40">
+          <div><strong>Bids per day: </strong><span id="actual-bids-per-day"></span></div>
+          <input type="text" class="fancy w7" id="set-bids-per-day" placeholder="ex. 1.5">
+          <div class="div-button-username">
+            <button type="button" class="button w7" onclick="setBidsPerDay()">Set Bids per day</button>
+          </div>
+        </div>
+        <div class="mt40">
+          <div><strong>Min post age: </strong><span id="actual-min-post-age"></span></div>
+          <input type="text" class="fancy w7" id="set-min-post-age" placeholder="Time in seconds">
+          <div class="div-button-username">
+            <button type="button" class="button w7" onclick="setMinPostAge()">Set min post age</button>
+          </div>
+        </div>
+        <div class="mt40">
+          <div><strong>Max post age: </strong><span id="actual-max-post-age"></span></div>
+          <input type="text" class="fancy w7" id="set-max-post-age" placeholder="Time in seconds">
+          <div class="div-button-username">
+            <button type="button" class="button w7" onclick="setMaxPostAge()">Set max post age</button>
+          </div>
+        </div>
+        <div class="mt40">
           <div><strong>Comment: </strong><p class="fancy b" id="actual-comment"></p></div>
           <!--<div><strong>Render Example: </strong><p id="actual-comment-preview"></p></div>-->
           <textarea rows="8" cols="60" id="set-comment" class="comment-area" placeholder="Use {weight}% to write the vote weight, @{sender} for the sender of the bid, and @{author} for the author"></textarea>

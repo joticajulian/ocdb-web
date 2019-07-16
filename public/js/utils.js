@@ -118,3 +118,18 @@ function addZero(x){
   if(x < 10) return "0"+x;
   else return ""+x;
 }
+
+function secondsToString(t){
+  var days = Math.floor( t / (60*60*24) )
+  t -= days*24*60*60
+  var hours = Math.floor( t / (60*60) )
+  t -= hours*60*60
+  var minutes = Math.floor( t / 60 )
+  t -= minutes*60
+  var seconds = Math.floor( t )
+  days = days>0 ? days+' days ' : ''
+  hours = hours>0 ? hours + ' hours ' : ''
+  minutes = minutes>0 ? minutes + ' minutes ' : ''
+  seconds = seconds>0 ? seconds + ' seconds ' : ''
+  return days + hours + minutes + seconds
+}
