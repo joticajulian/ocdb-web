@@ -148,6 +148,33 @@
           </div>
         </div>
         <div class="mt40">
+          <div><strong>Votes: </strong><span id="actual-enable-votes"></span></div>
+          <div class="div-button-username">
+            <button type="button" class="button w7" onclick="enableVotes()">Enable votes</button>
+          </div>
+          <div class="div-button-username">
+            <button type="button" class="button w7" onclick="enableVotes(false)">Disable votes</button>
+          </div>
+        </div>
+        <div class="mt40">
+          <div><strong>Refunds: </strong><span id="actual-enable-refunds"></span></div>
+          <div class="div-button-username">
+            <button type="button" class="button w7" onclick="enableRefunds()">Enable refunds</button>
+          </div>
+          <div class="div-button-username">
+            <button type="button" class="button w7" onclick="enableRefunds(false)">Disable refunds</button>
+          </div>
+        </div>
+        <div class="mt40">
+          <div><strong>Payments: </strong><span id="actual-enable-payments"></span></div>
+          <div class="div-button-username">
+            <button type="button" class="button w7" onclick="enablePayments()">Enable payments</button>
+          </div>
+          <div class="div-button-username">
+            <button type="button" class="button w7" onclick="enablePayments(false)">Disable payments</button>
+          </div>
+        </div>
+        <div class="mt40">
           <div><strong>Comment: </strong><p class="fancy b" id="actual-comment"></p></div>
           <!--<div><strong>Render Example: </strong><p id="actual-comment-preview"></p></div>-->
           <textarea rows="8" cols="60" id="set-comment" class="comment-area" placeholder="Use {weight}% to write the vote weight, @{sender} for the sender of the bid, and @{author} for the author"></textarea>
@@ -167,7 +194,7 @@
   <script src="js/configFirebase.js"></script>
   <script src="js/utils.js?3"></script>  
   <script src="js/login.js?27"></script>  
-  <script src="js/admins.js?11"></script>  
+  <script src="js/admins.js?12"></script>  
 </body>
 
 </html>

@@ -52,8 +52,8 @@ firebase.database().ref(config.bot+'/config').on('value', function(snapshot){
   console.log("enable_refunds: "+values.enable_refunds);
   console.log("enable_payments: "+values.enable_payments);
 }, function(error){
-  console.log("error loading state: "+error.message);
-  $('#error-message').text('error loading state: '+error.message).show();
+  console.log("error loading config: "+error.message);
+  $('#error-message').text('error loading config values: '+error.message).show();
 });
 
 firebase.database().ref(config.bot+'/max_bid_sbd').on('value', function(snapshot){
@@ -342,6 +342,51 @@ function setMaxPostAge(){
     $('#error-message-modify').text("Error: Number misspelled in max post age").show();
     $('#success-message-modify').hide();
   } 
+}
+
+function enableVotes(enable = true){
+  console.log('Enable votes: '+enable)
+  firebase.database().ref(config.bot+'/config/enable_votes').set(enable)
+  .then(function(){
+    console.log("Successfull");
+    $('#error-message-modify').hide();
+    $('#success-message-modify').text('Votes set to : '+enable).show();
+  })
+  .catch(function(error) {
+    console.log('Error: '+error.message);
+    $('#success-message-modify').hide();
+    $('#error-message-modify').text('Error: '+error.message).show();
+  });
+}
+
+function enableRefunds(enable = true){
+  console.log('Enable refunds: '+enable)
+  firebase.database().ref(config.bot+'/config/enable_refunds').set(enable)
+  .then(function(){
+    console.log("Successfull");
+    $('#error-message-modify').hide();
+    $('#success-message-modify').text('Refunds set to : '+enable).show();
+  })
+  .catch(function(error) {
+    console.log('Error: '+error.message);
+    $('#success-message-modify').hide();
+    $('#error-message-modify').text('Error: '+error.message).show();
+  });
+}
+
+function enablePayments(enable = true){
+  console.log('Enable payments: '+enable)
+  firebase.database().ref(config.bot+'/config/enable_payments').set(enable)
+  .then(function(){
+    console.log("Successfull");
+    $('#error-message-modify').hide();
+    $('#success-message-modify').text('Payments set to : '+enable).show();
+  })
+  .catch(function(error) {
+    console.log('Error: '+error.message);
+    $('#success-message-modify').hide();
+    $('#error-message-modify').text('Error: '+error.message).show();
+  });
 }
 
 function setComment(){
