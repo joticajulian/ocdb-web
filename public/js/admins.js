@@ -40,8 +40,8 @@ firebase.database().ref(config.bot+'/state').on('value', function(snapshot){
 firebase.database().ref(config.bot+'/config').on('value', function(snapshot){
   values = snapshot.val();
   $('#actual-bids-per-day').text(values.bids_per_day);
-  $('#actual-min-post-age').text(values.min_post_age);
-  $('#actual-max-post-age').text(values.max_post_age);
+  $('#actual-min-post-age').text(secondsToString(values.min_post_age));
+  $('#actual-max-post-age').text(secondsToString(values.max_post_age));
   $('#actual-enable-votes').text(values.enable_votes);
   $('#actual-enable-refunds').text(values.enable_refunds);
   $('#actual-enable-payments').text(values.enable_payments);
