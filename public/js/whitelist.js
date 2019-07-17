@@ -29,7 +29,11 @@ function deleteAccount(){
     var key = $('#remove-account').val().toLowerCase();
   }else{
     var key = $('#remove-account-device').val().toLowerCase(); 
-  }  
+  }
+  if(!key || key===''){
+    console.log('No account to remove')
+    return
+  }
   firebase.database().ref(config.bot+'/whitelist/'+key).set(null)
   .then(function() {
     console.log("Account @"+key+" deleted!");
