@@ -106,6 +106,13 @@
           <span class="content-subtitle-black b">OCDB Settings</span>
         </div>
         <div class="mt40">
+          <div><strong>@ocdbfund percent: </strong><span id="actual-ocdbfund-percent"></span></div>
+          <input type="text" class="fancy w7" id="set-ocdbfund-percent" placeholder="i.e. 0.15">
+          <div class="div-button-username">
+            <button type="button" class="button w7" onclick="setOCDBfundPercent()">Set ocdbfund</button>
+          </div>
+        </div>  
+        <div class="mt40">
           <div><strong>Min bid SBD: </strong><span id="actual-min-bid"></span></div>
           <input type="text" class="fancy w7" id="set-min-bid" placeholder="Min bid SBD">
           <div class="div-button-username">
@@ -194,7 +201,7 @@
   <script src="js/configFirebase.js"></script>
   <script src="js/utils.js?3"></script>  
   <script src="js/login.js?27"></script>  
-  <script src="js/admins.js?13"></script>  
+  <script src="js/admins.js?15"></script>  
 </body>
 
 </html>

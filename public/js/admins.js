@@ -45,12 +45,14 @@ firebase.database().ref(config.bot+'/config').on('value', function(snapshot){
   $('#actual-enable-votes').text(values.enable_votes);
   $('#actual-enable-refunds').text(values.enable_refunds);
   $('#actual-enable-payments').text(values.enable_payments);
+  $('#actual-ocdbfund-percent').text(values.perc_fund_account);
   console.log("bids_per_day: "+values.bids_per_day);
   console.log("min_post_age: "+values.min_post_age);
   console.log("max_post_age: "+values.max_post_age);
   console.log("enable_votes: "+values.enable_votes);
   console.log("enable_refunds: "+values.enable_refunds);
   console.log("enable_payments: "+values.enable_payments);
+  console.log("perc_fund_account: "+values.perc_fund_account);
 }, function(error){
   console.log("error loading config: "+error.message);
   $('#error-message').text('error loading config values: '+error.message).show();
@@ -208,6 +210,28 @@ function itemDelegator(name,delegator){
         '<div class="item-data"><span class="title-item">Total donation:</span>'+totalDonationSBD.toFixed(3)+' SBD<br>'+totalDonationSTEEM.toFixed(3)+' STEEM<br>'+totalDonationSP.toFixed(3)+' SP</div>'+
       '</div>'+
     '</div>';     
+}
+
+function setOCDBfundPercent(){
+  var perc = parseFloat($('#set-ocdbfund-percent').val());
+  if(perc>=0 && perc<=1){
+    console.log("Setting ocdbfund percentage: ");
+    console.log(perc);
+    firebase.database().ref(config.bot+'/config/perc_fund_account').set(perc)
+    .then(function() {
+      console.log("Successfull");
+      $('#error-message-modify').hide();
+      $('#success-message-modify').text('New ocdbfund percentage: '+perc).show(); 
+    })
+    .catch(function(error) {
+      console.log('Error: '+error.message);
+      $('#success-message-modify').hide();
+      $('#error-message-modify').text('Error: '+error.message).show();
+    });    
+  }else{
+    $('#error-message-modify').text("Error: The value must be between 0 and 1").show();
+    $('#success-message-modify').hide();
+  }  
 }
 
 function setMinBid(){
