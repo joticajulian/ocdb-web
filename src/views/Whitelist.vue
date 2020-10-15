@@ -62,7 +62,6 @@ export default {
   ],
 
   created() {
-    firebase.initializeApp(Config.CONFIG_FIREBASE)
     this.loadWhitelist()
   },
   

@@ -15,7 +15,7 @@ export default {
     initFirebase() {
       let self = this
 
-      firebase.initializeApp(Config.CONFIG_FIREBASE)
+      // firebase.initializeApp(Config.CONFIG_FIREBASE)
       firebase.auth().onAuthStateChanged(function(auth) {
         if (auth) {
           console.log("logged in "+auth.uid);

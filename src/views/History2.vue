@@ -17,11 +17,11 @@
         <div class="col-md-2">EXPIRED</div>
         <div class="col-md-2">STATUS</div>
       </div>
-      <div class="row fancy" v-for="(tx, key) in transaction_queue">
+      <div class="row fancy" v-for="(tx, key) in transaction_queue" :key="key">
         <div class="col-md-2"><small class="monospace">{{key}}({{tx.key}})</small></div>
         <div class="col-md-2">{{tx.operation[0]}} to {{tx.user}}</div>
         <div class="col-md-2">{{tx.expired}}</div>
-        <div class="col-md-2" v-if="tx.found"><a :href="'https://joticajulian.github.io/steemexplorer/#/b/'+tx.block+'/'+tx.transaction">Link</a></div>
+        <div class="col-md-2" v-if="tx.found"><a :href="'https://joticajulian.github.io/hiveexplorer/#/explorer/b/'+tx.block+'/'+tx.transaction">Link</a></div>
         <div class="col-md-2" v-else-if="tx.expired"><button class="btn btn-primary" @click="relaunch(tx.key)">Relaunch</button></div>
         <div class="col-md-2" v-else>In progress</div>
         <div class="col-md-2">{{tx.expiration}}</div>

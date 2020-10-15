@@ -5,7 +5,7 @@ import Home from './views/Home.vue'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
+  // mode: 'history',
   base: process.env.BASE_URL,
   routes: [
     {
@@ -32,6 +32,11 @@ export default new Router({
       path: '/history2',
       name: 'history2',
       component: () => import('./views/History2.vue')
+    },
+    {
+      path: '/delegators',
+      name: 'delegators',
+      component: () => import('./views/Delegators.vue')
     }
   ]
 })

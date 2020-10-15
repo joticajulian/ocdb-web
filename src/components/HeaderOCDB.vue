@@ -30,12 +30,12 @@
             <span class="ml-2 nav-link-text">Whitelist</span>
           </router-link>
         </li>
-        <li class="nav-item" title="Queue">
+        <!-- <li class="nav-item" title="Queue">
           <router-link class="nav-link" to="/queue">
             <font-awesome-icon icon="book" />
             <span class="ml-2 nav-link-text">Queue</span>
           </router-link>
-        </li>
+        </li> -->
         <li class="nav-item" title="Delegators">
           <router-link class="nav-link" to="/delegators">
             <font-awesome-icon icon="user-tie" />

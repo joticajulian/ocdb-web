@@ -1,32 +1,26 @@
-const CONFIG_FIREBASE = {
+firebase.initializeApp({
   apiKey: 'AIzaSyB2GGuYkXEip9Q_BH4DnOEUQN-FscucjEc',
   authDomain: 'steem-bid-bot.firebaseapp.com',
   databaseURL: 'https://steem-bid-bot.firebaseio.com',
   projectId: 'steem-bid-bot',
   storageBucket: '',
   messagingSenderId: '111791285606'
-}
+})
 
 const BOT = 'ocdb'
 
 const config = {
   'production': {
     RPC_NODES : [
-      'https://api.steemit.com',
+      'https://api.hive.blog',
     ],
-    IMAGE_HOSTER : 'https://cdn.eftg.eu',
-    ELASTIC : 'https://api.eftg.eu/pulsar/',
-    CDN : 'https://cdn.eftg.eu/',
     EFTG_HARDFORK_0_1 : false,
     DEV_LOGIN: false
   },
   'development': {
     RPC_NODES : [
-      'https://api.steemit.com',
+      'https://api.hive.blog',
     ],
-    IMAGE_HOSTER : 'https://cdn.dev.blkcc.xyz',
-    ELASTIC : 'https://apidev.blkcc.xyz/pulsar/',
-    CDN : 'https://cdn.dev.blkcc.xyz/',
     EFTG_HARDFORK_0_1 : true,
     DEV_LOGIN: true
   }
@@ -35,9 +29,9 @@ const config = {
 const environment = process.env.NODE_ENV || 'development';
 const finalConfig = config[environment];
 
-const SBD = 'SBD';
-const STEEM = 'STEEM';
-const SP = 'SP';
+const SBD = 'HBD';
+const STEEM = 'HIVE';
+const SP = 'HP';
 const VESTS = 'VESTS';
 
 const HARDFORK = 19
@@ -62,16 +56,12 @@ const MAP = {
   INI_ZOOM : 4 ,
 }
 
-const APP_VERSION = 'ocdb/1.0.0';
+const APP_VERSION = 'ocdb/2.0.0';
 
 export default{
-  CONFIG_FIREBASE,
   BOT,
   
   RPC_NODES: finalConfig.RPC_NODES,
-  IMAGE_HOSTER: finalConfig.IMAGE_HOSTER,
-  ELASTIC: finalConfig.ELASTIC,
-  CDN: finalConfig.CDN,
   DEV_LOGIN: finalConfig.DEV_LOGIN,
   
   SBD: SBD,
