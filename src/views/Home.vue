@@ -1,7 +1,7 @@
 <template>
   <div>
     <HeaderOCDB/>
-    <div class="container">
+    <div class="content-wrapper">
       <div class="row mt-4">
         <div class="col-md-6">
           <h2>Operation Curation Bot</h2>
@@ -15,12 +15,14 @@
         </div>
       </div>
     </div>
+    <Delegate/>
   </div>
 </template>
 
 <script>
 import Config from '@/config.js'
 import HeaderOCDB from '@/components/HeaderOCDB'
+import Delegate from '@/components/Delegate'
 import SteemClient from '@/mixins/SteemClient.js'
 
 export default {
@@ -32,7 +34,8 @@ export default {
   },
 
   components: {
-    HeaderOCDB
+    HeaderOCDB,
+    Delegate,
   },
 
   mixins: [
